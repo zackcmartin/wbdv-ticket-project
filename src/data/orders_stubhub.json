@@ -1,0 +1,49 @@
+{
+  "listings": {
+    "numFound": 1,
+    "listing": [
+      {
+        "id": "1563168226",
+        "status": "ACTIVE",
+        "eventId": "104385955",
+        "genreId": "100271406",
+        "performerId": "100271406",
+        "groupingId": "64010",
+        "categoryId": "1",
+        "eventDescription": "Jeremy Zucker",
+        "eventDate": "2019-11-09T20:00:00-0500",
+        "eventTimeZone": "EST",
+        "eventActive": true,
+        "inhandDate": "2019-10-25T13:33:51-0400",
+        "quantity": 4,
+        "quantityRemain": 3,
+        "section": "General Admission",
+        "rows": "N/A",
+        "seats": "Ticket 2,Ticket 3,Ticket 4",
+        "venueConfigId": 596446,
+        "venueDescription": "The Sinclair",
+        "splitOption": "NOSINGLES",
+        "splitQuantity": 1,
+        "deliveryOption": "PDF",
+        "preDelivered": true,
+        "ableToRequestLMS": false,
+        "saleEndDate": "2019-11-09T20:00:00-0500",
+        "dateLastModified": "2019-10-28T22:25:49-0400",
+        "lastUpdatedBy": "Single|V2|access@stubhub.com|Gen31Application",
+        "pricePerTicket": { "amount": 55.3, "currency": "USD" },
+        "payoutPerTicket": { "amount": 47, "currency": "USD" },
+        "paymentType": "1",
+        "externalListingId": "Multievent_104385955_0.5697969348049015",
+        "city": "Cambridge",
+        "state": "MA",
+        "country": "US",
+        "ticketMediumId": 2,
+        "autoPricingEnabledInd": 0,
+        "ga": true,
+        "scrubbingEnabled": false,
+        "deliveryMethods": [{ "id": 2, "name": "Instant download" }],
+        "fulfillmentMethods": [{ "id": 4, "name": "PDF - PreDelivery" }]
+      }
+    ]
+  }
+}
