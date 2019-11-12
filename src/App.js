@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import TicketPage from './pages/TicketPage'
+import StubHubController from './components/StubHubController'
 
 function App() {
   return (
