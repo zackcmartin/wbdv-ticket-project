@@ -1,25 +1,68 @@
-# wbdv-ticket-project
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<b>State the problem you are trying to solve:</b>
+## Available Scripts
 
-Ticket resellers have to manually transfer their tickets once they are sold from ticketmaster to stubhub. We will create a product that will allow users to login to their ticketmaster and stubhub accounts on our website and it will automatically transfer the tickets. It will also update their listings and display when they have sold and how much. 
+In the project directory, you can run:
 
-<b>Include a description of at least two types of users that would use your Web application
-For each of the types of users, provide two goals the user would like to achieve with your Web application:</b>
+### `npm start`
 
-Ticket Reseller: 
-The user should be able to add his ticketmaster and stubhub accounts which will automatically add his ticketmaster and stubhub listings. Then will try to match the two listings and display the ones that match. 
-<br/><br/>Manager:
-Will be able to see resellers and have the ability to add and remove users and their listings. 
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-<b>State the overall strategy of how you intend to solve the problem</b><br/>
-	So first, we will get the user to enter his stubhub and ticketmaster account details. Then using the stubhub api and the account, we will get the listings and monitor which ones have been sold. We will then get the ticketmaster listings information by possibly using web scraping. Then, when a listing has been sold, we will scrape ticketmaster and have scrapy to push a button that will transfer ticketmaster tickets to the stubhub buyer. 
-	We will have a script that will run either manually, or if we have time to work on it  a few times a day using an ec2. 
-	We will store the listings and the users in the node.js database. 
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
+### `npm test`
 
-<b>One of the main requirements is to work with data available from some public, free, Web API. Provide a brief description of the Web API you intend to use</b>
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-One API we will need to use is the stubhub api. https://developer.stubhub.com/ 
-We will need to use this to find the listings that the user has and to see if the listing has been sold and possibly to who it has been sold to. 
+### `npm run build`
 
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
