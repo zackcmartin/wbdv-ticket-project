@@ -14,7 +14,6 @@ export default class StubHubService {
 
         if (this.myInstance == null) {
             this.myInstance = new StubHubService()
-            // console.log(courses);
         }
         return this.myInstance
     }
