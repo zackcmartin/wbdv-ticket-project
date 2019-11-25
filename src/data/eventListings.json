@@ -1,0 +1,726 @@
+{
+  "eventId": 104440569,
+  "totalListings": 24,
+  "totalTickets": 107,
+  "minQuantity": 1,
+  "maxQuantity": 12,
+  "start": 0,
+  "rows": 24,
+  "additionalEventLevelPriceInfo": [],
+  "additionalSectionLevelPriceInfo": [],
+  "listings": [
+    {
+      "listingId": 1585349488,
+      "row": "GA",
+      "quantity": 1,
+      "sellerSectionName": "General Admission",
+      "sectionName": "General Admission",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "NONE",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 58.98,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1
+      ]
+    },
+    {
+      "listingId": 1585349489,
+      "row": "GA",
+      "quantity": 5,
+      "sellerSectionName": "General Admission",
+      "sectionName": "General Admission",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 58.98,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "listingId": 1579931612,
+      "row": "GA",
+      "quantity": 6,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 58.99,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "listingId": 1572211225,
+      "row": "GA",
+      "quantity": 3,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "faceValue": {
+        "amount": 23,
+        "currency": "USD"
+      },
+      "pricePerProduct": {
+        "amount": 59,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "listingId": 1573193660,
+      "row": "GA",
+      "quantity": 6,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 59.95,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "listingId": 1575009619,
+      "quantity": 1,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "NONE",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 61.2,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1
+      ],
+      "products": [
+        {
+          "row": "GA",
+          "seat": "4669"
+        }
+      ]
+    },
+    {
+      "listingId": 1573177815,
+      "quantity": 6,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "NOSINGLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 62,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "products": [
+        {
+          "row": "GA",
+          "seat": "1007"
+        },
+        {
+          "row": "GA",
+          "seat": "1008"
+        },
+        {
+          "row": "GA",
+          "seat": "1009"
+        },
+        {
+          "row": "GA",
+          "seat": "1010"
+        },
+        {
+          "row": "GA",
+          "seat": "1011"
+        },
+        {
+          "row": "GA",
+          "seat": "1012"
+        }
+      ]
+    },
+    {
+      "listingId": 1580444887,
+      "row": "GA",
+      "quantity": 5,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 62.35,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "listingId": 1572883868,
+      "row": "GA",
+      "quantity": 6,
+      "sellerSectionName": "GENERAL ADMISSION",
+      "sectionName": "GENERAL ADMISSION",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "NOSINGLES",
+      "sellerOwnInd": 0,
+      "faceValue": {
+        "amount": 30.17,
+        "currency": "USD"
+      },
+      "pricePerProduct": {
+        "amount": 63.6,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "listingId": 1582363879,
+      "row": "GA",
+      "quantity": 6,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 64.75,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "listingId": 1577130246,
+      "row": "GA",
+      "quantity": 6,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "NOSINGLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 65,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "listingId": 1577657295,
+      "row": "GA",
+      "quantity": 4,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 66.08,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "listingId": 1583123801,
+      "row": "GA",
+      "quantity": 6,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 67.14,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "listingId": 1574507663,
+      "quantity": 12,
+      "sellerSectionName": "General Admission",
+      "sectionName": "General Admission",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "NOSINGLES",
+      "sellerOwnInd": 1,
+      "pricePerProduct": {
+        "amount": 72,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "products": [
+        {
+          "row": "N/A",
+          "seat": "Ticket 1"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 2"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 3"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 4"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 5"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 6"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 7"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 8"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 9"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 10"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 11"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 12"
+        }
+      ]
+    },
+    {
+      "listingId": 1575450789,
+      "row": "GA",
+      "quantity": 6,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "faceValue": {
+        "amount": 23,
+        "currency": "USD"
+      },
+      "pricePerProduct": {
+        "amount": 73,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "listingId": 1574622577,
+      "row": "1",
+      "quantity": 4,
+      "sellerSectionName": "GA FLOOR",
+      "sectionName": "GA FLOOR",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 73.5,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "listingId": 1573190531,
+      "quantity": 1,
+      "sellerSectionName": "General Admission",
+      "sectionName": "General Admission",
+      "listingAttributeList": [
+        15909
+      ],
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "NONE",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 100,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1
+      ],
+      "products": [
+        {
+          "row": "N/A",
+          "seat": "Ticket 1"
+        }
+      ]
+    },
+    {
+      "listingId": 1583888643,
+      "quantity": 5,
+      "sellerSectionName": "General Admission",
+      "sectionName": "General Admission",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "NOSINGLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 100,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "products": [
+        {
+          "row": "N/A",
+          "seat": "Ticket 1"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 2"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 3"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 4"
+        },
+        {
+          "row": "N/A",
+          "seat": "Ticket 5"
+        }
+      ]
+    },
+    {
+      "listingId": 1572445559,
+      "row": "GA",
+      "quantity": 4,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "faceValue": {
+        "amount": 30.18,
+        "currency": "USD"
+      },
+      "pricePerProduct": {
+        "amount": 125,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "listingId": 1572445560,
+      "row": "GA",
+      "quantity": 4,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "faceValue": {
+        "amount": 30.18,
+        "currency": "USD"
+      },
+      "pricePerProduct": {
+        "amount": 125,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "listingId": 1576921953,
+      "row": "GA",
+      "quantity": 1,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "NONE",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 500,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1
+      ]
+    },
+    {
+      "listingId": 1579899855,
+      "row": "GA",
+      "quantity": 1,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "listingAttributeList": [
+        14699
+      ],
+      "deliveryTypeList": [
+        9
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 500,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1
+      ]
+    },
+    {
+      "listingId": 1575950798,
+      "row": "GA",
+      "quantity": 6,
+      "sellerSectionName": "GA",
+      "sectionName": "GA",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 999,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "listingId": 1585349487,
+      "row": "GA",
+      "quantity": 2,
+      "sellerSectionName": "General Admission",
+      "sectionName": "General Admission",
+      "deliveryTypeList": [
+        1
+      ],
+      "isGA": 1,
+      "splitOption": "MULTIPLES",
+      "sellerOwnInd": 0,
+      "pricePerProduct": {
+        "amount": 7000,
+        "currency": "USD"
+      },
+      "splitQuantity": "1",
+      "buyQuantityOptions": [
+        1,
+        2
+      ]
+    }
+  ]
+}
