@@ -14,7 +14,6 @@ export default class StubHubService {
 
         if (this.myInstance == null) {
             this.myInstance = new StubHubService()
-            // console.log(courses);
         }
         return this.myInstance
     }
@@ -47,6 +46,21 @@ export default class StubHubService {
     async getAllListings() {
         let proxyUrl = 'https://cors-anywhere.herokuapp.com/'
         let url = 'https://api.stubhub.com/sellers/listings/v3';
+        const response =  await fetch(proxyUrl + url, {
+            method: 'get',
+            headers: {
+                'Authorization': 'Bearer ' + this.access_token,
+                'Accept': 'application/json'
+
+            }
+        })
+        const json = response.json()
+        return json
+    }
+
+    async getEventListings(event_id) {
+        let proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+        let url = `https://api.stubhub.com/sellers/find/listings/v3/?eventId=${event_id}`;
         const response =  await fetch(proxyUrl + url, {
             method: 'get',
             headers: {
