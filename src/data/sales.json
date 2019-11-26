@@ -1,6 +1,4 @@
-{
-  "numFound": 24,
-  "sales": [
+[
     {
       "saleId": "240081359",
       "eventId": "103856138",
@@ -672,7 +670,7 @@
       "paymentType": "1",
       "payoutPerTicket": { "amount": 67.59, "currency": "USD" },
       "totalPayout": { "amount": 135.18, "currency": "USD" },
-      "eventDescription": "JAM'N 94.5's Summer Jam 2019 featuring Meek Mill, Future, YG + Mustard, Megan Thee Stallion and more Tickets",
+      "eventDescription": "JAM'N 94.5's Summer Jam 2019 featuring Meek Mill, Future, YG + Mustard",
       "eventDate": "2019-09-08T19:00:00-0400",
       "eventTimeZone": "Eastern Standard Time",
       "venueDescription": "Xfinity Center",
@@ -1297,4 +1295,3 @@
       ]
     }
   ]
-}

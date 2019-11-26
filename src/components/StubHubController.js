@@ -2,6 +2,10 @@ import React from 'react'
 
 import StubHubService from '../stubhub-service/StubHubService';
 
+import orderData from '../data/orders_stubhub.json'
+import paymentData from '../data/payments.json'
+import saleData from '../data/sales.json'
+
 let stubHubService = StubHubService.getInstance();
 
 export default class StubHubController extends React.Component {
@@ -42,86 +46,193 @@ export default class StubHubController extends React.Component {
             listingArray: null,
             currentListing: null,
             orders: null,
+            currentOrder: null,
             payments: null,
-            sales: null
+            currentPayment: null,
+            sales: null,
+            currentSale: null,
+            isJsonData: false
         }))
     }
 
     async getAllListings() {
-        let response = await stubHubService.getAllListings();
-
-        this.setState(prevState => ({
-            userInput: {
-                username: '',
-                password: ''
-            },
-            api_key_response: prevState.api_key_response,
-            api_key: prevState.api_key,
-            listings: response,
-            listingArray: response.listings.listing,
-            currentListing: prevState.currentListing,
-            orders: prevState.orders,
-            payments: prevState.payments,
-            sales: prevState.sales
-        }))
+        if (this.state.isJsonData) {
+            this.setState(prevState => ({
+                userInput: {
+                    username: '',
+                    password: ''
+                },
+                api_key_response: prevState.api_key_response,
+                api_key: prevState.api_key,
+                listings: prevState.listings,
+                listingArray: orderData,
+                currentListing: prevState.currentListing,
+                orders: prevState.orders,
+                currentOrder: prevState.currentOrder,
+                payments: prevState.payments,
+                currentPayment: prevState.currentPayment,
+                sales: prevState.sales,
+                currentSale: prevState.currentSale,
+                isJsonData: prevState.isJsonData
+            }))
+        }
+        else {
+            let response = await stubHubService.getAllListings();
+            this.setState(prevState => ({
+                userInput: {
+                    username: '',
+                    password: ''
+                },
+                api_key_response: prevState.api_key_response,
+                api_key: prevState.api_key,
+                listings: response,
+                listingArray: response.listings.listing,
+                currentListing: prevState.currentListing,
+                orders: prevState.orders,
+                currentOrder: prevState.currentOrder,
+                payments: prevState.payments,
+                currentPayment: prevState.currentPayment,
+                sales: prevState.sales,
+                currentSale: prevState.currentSale,
+                isJsonData: prevState.isJsonData
+            }))
+        }
     }
 
     async getAllOrders() {
-        let response = await stubHubService.getAllOrders();
-        this.setState(prevState => ({
-            userInput: {
-                username: '',
-                password: ''
-            },
-            api_key_response: prevState.api_key_response,
-            api_key: prevState.api_key,
-            listings: prevState.listings,
-            listingArray: prevState.listingArray,
-            currentListing: prevState.currentListing,
-            orders: response,
-            payments: prevState.payments,
-            sales: prevState.sales
-        }))
+        if (this.state.isJsonData) {
+            this.setState(prevState => ({
+                userInput: {
+                    username: '',
+                    password: ''
+                },
+                api_key_response: prevState.api_key_response,
+                api_key: prevState.api_key,
+                listings: prevState.listings,
+                listingArray: prevState.listingArray,
+                currentListing: prevState.currentListing,
+                orders: prevState.orders,
+                currentOrder: prevState.currentOrder,
+                payments: prevState.payments,
+                currentPayment: prevState.currentPayment,
+                sales: prevState.sales,
+                currentSale: prevState.currentSale,
+                isJsonData: prevState.isJsonData
+            }))
+        }
+        else {
+            let response = await stubHubService.getAllOrders();
+            this.setState(prevState => ({
+                userInput: {
+                    username: '',
+                    password: ''
+                },
+                api_key_response: prevState.api_key_response,
+                api_key: prevState.api_key,
+                listings: prevState.listings,
+                listingArray: prevState.listingArray,
+                currentListing: prevState.currentListing,
+                orders: response,
+                currentOrder: prevState.currentOrder,
+                payments: prevState.payments,
+                currentPayment: prevState.currentPayment,
+                sales: prevState.sales,
+                currentSale: prevState.currentSale,
+                isJsonData: prevState.isJsonData
+            }))
+        }
     }
 
     async getAllPayments() {
-        let response = await stubHubService.getAllPayments();
-        this.setState(prevState => ({
-            userInput: {
-                username: '',
-                password: ''
-            },
-            api_key_response: prevState.api_key_response,
-            api_key: prevState.api_key,
-            listings: prevState.listings,
-            listingArray: prevState.listingArray,
-            currentListing: prevState.currentListing,
-            orders: prevState.orders,
-            payments: response,
-            sales: prevState.sales,
-        }))
+        if (this.state.isJsonData) {
+            this.setState(prevState => ({
+                userInput: {
+                    username: '',
+                    password: ''
+                },
+                api_key_response: prevState.api_key_response,
+                api_key: prevState.api_key,
+                listings: prevState.listings,
+                listingArray: prevState.listingArray,
+                currentListing: prevState.currentListing,
+                orders: prevState.orders,
+                currentOrder: prevState.currentOrder,
+                payments: paymentData,
+                currentPayment: prevState.currentPayment,
+                sales: prevState.sales,
+                currentSale: prevState.currentSale,
+                isJsonData: prevState.isJsonData
+            }))
+        }
+        else {
+            let response = await stubHubService.getAllPayments();
+            this.setState(prevState => ({
+                userInput: {
+                    username: '',
+                    password: ''
+                },
+                api_key_response: prevState.api_key_response,
+                api_key: prevState.api_key,
+                listings: prevState.listings,
+                listingArray: prevState.listingArray,
+                currentListing: prevState.currentListing,
+                orders: prevState.orders,
+                currentOrder: prevState.currentOrder,
+                payments: response.payments,
+                currentPayment: prevState.currentPayment,
+                sales: prevState.sales,
+                currentSale: prevState.currentSale,
+                isJsonData: prevState.isJsonData
+            }))
+        }
     }
 
     async getAllSales() {
-        let response = await stubHubService.getAllSales();
-        this.setState(prevState => ({
-            userInput: {
-                username: '',
-                password: ''
-            },
-            api_key_response: prevState.api_key_response,
-            api_key: prevState.api_key,
-            listings: prevState.listings,
-            listingArray: prevState.listingArray,
-            currentListing: prevState.currentListing,
-            orders: prevState.orders,
-            payments: prevState.payments,
-            sales: response
-        }))
+        if (this.state.isJsonData) {
+            this.setState(prevState => ({
+                userInput: {
+                    username: '',
+                    password: ''
+                },
+                api_key_response: prevState.api_key_response,
+                api_key: prevState.api_key,
+                listings: prevState.listings,
+                listingArray: prevState.listingArray,
+                currentListing: prevState.currentListing,
+                orders: prevState.orders,
+                currentOrder: prevState.currentOrder,
+                payments: prevState.payments,
+                currentPayment: prevState.currentPayment,
+                sales: saleData,
+                currentSale: prevState.currentSale,
+                isJsonData: prevState.isJsonData
+            }))
+        }
+        else {
+            let response = await stubHubService.getAllSales();
+            this.setState(prevState => ({
+                userInput: {
+                    username: '',
+                    password: ''
+                },
+                api_key_response: prevState.api_key_response,
+                api_key: prevState.api_key,
+                listings: prevState.listings,
+                listingArray: prevState.listingArray,
+                currentListing: prevState.currentListing,
+                orders: prevState.orders,
+                currentOrder: prevState.currentOrder,
+                payments: prevState.payments,
+                currentPayment: prevState.currentPayment,
+                sales: response.sales,
+                currentSale: prevState.currentSale,
+                isJsonData: prevState.isJsonData
+            }))
+        }
     }
 
 
-    setJSON = (json) => {
+    setCurrentListing = (json) => {
         this.setState(prevState => ({
             userInput: {
                 username: '',
@@ -133,11 +244,101 @@ export default class StubHubController extends React.Component {
             listingArray: prevState.listingArray,
             currentListing: json,
             orders: prevState.orders,
+            currentOrder: prevState.currentOrder,
             payments: prevState.payments,
-            sales: prevState.sales
+            currentPayment: prevState.currentPayment,
+            sales: prevState.sales,
+            currentSale: prevState.currentSale,
+            isJsonData: prevState.isJsonData
         }))
     }
 
+    setCurrentOrder = (json) => {
+        this.setState(prevState => ({
+            userInput: {
+                username: '',
+                password: ''
+            },
+            api_key_response: prevState.api_key_response,
+            api_key: prevState.api_key,
+            listings: prevState.listings,
+            listingArray: prevState.listingArray,
+            currentListing: prevState.currentListing,
+            orders: prevState.orders,
+            currentOrder: json,
+            payments: prevState.payments,
+            currentPayment: prevState.currentPayment,
+            sales: prevState.sales,
+            currentSale: prevState.currentSale,
+            isJsonData: prevState.isJsonData
+        }))
+    }
+
+    setCurrentPayment = (json) => {
+        this.setState(prevState => ({
+            userInput: {
+                username: '',
+                password: ''
+            },
+            api_key_response: prevState.api_key_response,
+            api_key: prevState.api_key,
+            listings: prevState.listings,
+            listingArray: prevState.listingArray,
+            currentListing: prevState.currentListing,
+            orders: prevState.orders,
+            currentOrder: prevState.currentOrder,
+            payments: prevState.payments,
+            currentPayment: json,
+            sales: prevState.sales,
+            currentSale: prevState.currentSale,
+            isJsonData: prevState.isJsonData
+        }))
+    }
+
+
+
+    setCurrentSale = (json) => {
+        this.setState(prevState => ({
+            userInput: {
+                username: '',
+                password: ''
+            },
+            api_key_response: prevState.api_key_response,
+            api_key: prevState.api_key,
+            listings: prevState.listings,
+            listingArray: prevState.listingArray,
+            currentListing: prevState.currentListing,
+            orders: prevState.orders,
+            currentOrder: prevState.currentOrder,
+            payments: prevState.payments,
+            currentPayment: prevState.currentPayment,
+            sales: prevState.sales,
+            currentSale: json,
+            isJsonData: prevState.isJsonData
+        }))
+    }
+
+
+    setJsonData = () => {
+        this.setState(prevState => ({
+            userInput: {
+                username: '',
+                password: ''
+            },
+            api_key_response: prevState.api_key_response,
+            api_key: 'zLLiPYgBRBsDoBI6FYsIGdRKhG5A',
+            listings: null,
+            listingArray: null,
+            currentListing: null,
+            orders: null,
+            currentOrder: null,
+            payments: null,
+            currentPayment: null,
+            sales: null,
+            currentSale: null,
+            isJsonData: true
+        }))
+    }
 
 
     render() {
@@ -147,11 +348,11 @@ export default class StubHubController extends React.Component {
                 <div className="row">
 
                     <div className="col-4">
-                        <h2> Get API key </h2>
+                        <h2> Sign in with Stubhub account</h2>
                         <div>
                             <input
                                 value={this.state.username}
-                                placeholder="Stubhub username" className="form-control"
+                                placeholder="Email address" className="form-control"
                                 onChange={(e) => this.state.userInput.username = e.currentTarget.value} />
                             <input
                                 value={this.state.password}
@@ -159,6 +360,8 @@ export default class StubHubController extends React.Component {
                                 placeholder="Stubhub password" className="form-control"
                                 onChange={(e) => this.state.userInput.password = e.currentTarget.value} />
                             <button onClick={this.getAPIkey} className="btn btn-primary btn-block">Get API Key</button>
+                            <br />
+                            <button onClick={this.setJsonData} className="btn btn-primary btn-block">Sign in with one of our Stubhub Accounts</button>
                         </div>
                     </div>
                     <div className="col-6" style={{ 'max-height': '230px', overflow: 'scroll' }}>
@@ -177,10 +380,9 @@ export default class StubHubController extends React.Component {
                     <div className="col-6">
                         <h2> Result </h2>
                         <ul className="list-group">
-
-                            {this.state.listings && this.state.listingArray.map((listing) => (
-                                <li className="list-group-item">
-                                    <button className="btn btn-info" onClick={() => this.setJSON(listing)}>
+                            {this.state.listingArray && this.state.listingArray.map((listing) => (
+                                <li className="list-group">
+                                    <button className="btn btn-info" onClick={() => this.setCurrentListing(listing)}>
                                         {listing.eventDescription}
                                     </button>
                                 </li>
@@ -190,25 +392,26 @@ export default class StubHubController extends React.Component {
                         <pre style={{ 'text-align': 'left' }}> {this.state.currentListing ? JSON.stringify(this.state.currentListing) : null} </pre>
                     </div>
                 </div>
-
-                <div className="row" style={this.state.api_key === null ? { display: 'none' } : { 'padding-top': 30 }} >
-                    <div className="col-4">
-                        <h2> Get All Orders </h2>
-                        <button onClick={this.getAllOrders} className="btn btn-primary btn-block">Get All Orders</button>
-                    </div>
-                    <div className="col-6">
-                        <h2> Result </h2>
-                        <pre style={{ 'text-align': 'left' }}> {this.state.orders ? JSON.stringify(this.state.orders) : null} </pre>
-                    </div>
-                </div>
                 <div className="row" style={this.state.api_key === null ? { display: 'none' } : { 'padding-top': 30 }} >
                     <div className="col-4">
                         <h2> Get All Payments </h2>
+
                         <button onClick={this.getAllPayments} className="btn btn-primary btn-block">Get All Payments</button>
                     </div>
                     <div className="col-6">
                         <h2> Result </h2>
-                        <pre style={{ 'text-align': 'left' }}> {this.state.payments ? JSON.stringify(this.state.payments) : null} </pre>
+
+                        <ul className="list-group">
+                            {this.state.payments && this.state.payments.map((payment) => (
+                                <li className="list-group">
+                                    <button className="btn btn-info" onClick={() => this.setCurrentPayment(payment)}>
+                                        {payment.eventName}
+                                    </button>
+                                </li>
+                            ))
+                            }
+                        </ul>
+                        <pre style={{ 'text-align': 'left' }}> {this.state.currentPayment ? JSON.stringify(this.state.currentPayment) : null} </pre>
                     </div>
                 </div>
                 <div className="row" style={this.state.api_key === null ? { display: 'none' } : { 'padding-top': 30 }} >
@@ -218,7 +421,30 @@ export default class StubHubController extends React.Component {
                     </div>
                     <div className="col-6">
                         <h2> Result </h2>
-                        <pre style={{ 'text-align': 'left' }}> {this.state.sales ? JSON.stringify(this.state.sales) : null} </pre>
+
+                        <ul>
+                            {this.state.sales && this.state.sales.map((sale) => (
+                                <li className="list-group">
+                                    <button className="btn btn-info" onClick={() => this.setCurrentSale(sale)}>
+                                        {sale.eventDescription}
+                                    </button>
+                                </li>
+                            ))
+                            }
+                        </ul>
+                        <pre style={{ 'text-align': 'left' }}> {this.state.currentSale ? JSON.stringify(this.state.currentSale) : null} </pre>
+                    </div>
+                </div>
+
+
+                <div className="row" style={this.state.api_key === null ? { display: 'none' } : { 'padding-top': 30 }} >
+                    <div className="col-4">
+                        <h2> Get All Orders </h2>
+                        <button onClick={this.getAllOrders} className="btn btn-primary btn-block">Get All Orders</button>
+                    </div>
+                    <div className="col-6">
+                        <h2> Result </h2>
+                        <pre style={{ 'text-align': 'left' }}> {this.state.currentOrder ? JSON.stringify(this.state.currentOrder) : null} </pre>
                     </div>
                 </div>
 

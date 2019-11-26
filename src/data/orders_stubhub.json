@@ -1,7 +1,4 @@
-{
-  "listings": {
-    "numFound": 2,
-    "listing": [
+[
       {
         "id": "1563168226",
         "status": "ACTIVE",
@@ -85,6 +82,4 @@
         "deliveryMethods": [{ "id": 1, "name": "Electronic" }],
         "fulfillmentMethods": [{ "id": 5, "name": "PDF" }]
       }
-    ]
-  }
-}
+]

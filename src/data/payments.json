@@ -1,5 +1,4 @@
-{
-  "payments": [
+[
     {
       "orderID": "251194258",
       "paymentAmount": { "amount": 120.7, "currency": "USD" },
@@ -253,7 +252,4 @@
       "amtPaidAfterCreditMemo": { "amount": 122.37, "currency": "USD" },
       "ID": "188802574"
     }
-  ],
-  "numFound": 12,
-  "currencySummary": []
-}
+  ]
