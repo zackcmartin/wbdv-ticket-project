@@ -2,11 +2,14 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import StubHubController from './components/StubHubController'
+import TicketPage from './pages/TicketPage'
+import Login from './pages/Login'
+import RoutingPage from './pages/RoutingPage'
 
 
 function App() {
   return (
-    <StubHubController />
+    <RoutingPage />
     // <div className="App">
     //   <header className="App-header">
     //     <img src={logo} className="App-logo" alt="logo" />
