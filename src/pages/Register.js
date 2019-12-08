@@ -79,7 +79,7 @@ export default class Login extends React.Component {
     render() {
 
         if (this.state.toSignIn === true) {
-            return <Redirect to='/' />
+            return <Redirect to='/login' />
         }
 
         return (
@@ -149,7 +149,7 @@ export default class Login extends React.Component {
                     <div className="row">
                         <div class="col-md-10 col-md-offset-1">
                             <h4>Already Signed Up With Us?</h4>
-                            <Link to={`/`}>
+                            <Link to={`/login`}>
                                 <button className="btn btn-info"> Sign In</button>
                             </Link>
                         </div>

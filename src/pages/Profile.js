@@ -4,9 +4,14 @@ import StubHubService from '../stubhub-service/StubHubService';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import logo from './logo.png';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
 
 import { Link, Redirect } from 'react-router-dom'
 
+library.add(faTrashAlt);
 
 let stubHubService = StubHubService.getInstance();
 
@@ -17,10 +22,16 @@ export default class Profile extends React.Component {
 
 
         let loadError = false;
-        let username = '';
+        let userInput = {
+            username: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            type: ''
+        };
 
         try {
-            username = this.props.location.state.username
+            userInput = this.props.location.state.user
         }
         catch{
             loadError = true;
@@ -28,13 +39,7 @@ export default class Profile extends React.Component {
 
 
         this.state = {
-            userInput: {
-                username: username,
-                password: '',
-                firstName: '',
-                lastName: '',
-                type: ''
-            },
+            userInput: userInput,
             error: false,
             events: '',
             listingArray: '',
@@ -52,9 +57,9 @@ export default class Profile extends React.Component {
         fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}`)
             .then(response => response.json()).then(user => this.setState({ userInput: user })).catch(err => this.setState({ error: true }))
 
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}/events`)
-            .then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))
+        this.getEvents()
     }
+
 
 
 
@@ -71,6 +76,27 @@ export default class Profile extends React.Component {
             this.setState({ listingError: true })
         }
     }
+
+
+    getEvents = () => {
+        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}/events`)
+            .then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))
+    }
+
+
+
+    deleteEvent = (eventId) =>
+        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}/events/${eventId}`, {
+            method: 'DELETE',
+            body: JSON.stringify(eventId),
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Origin': true
+            },
+        })
+            .then(() => this.getEvents())
 
 
 
@@ -108,24 +134,29 @@ export default class Profile extends React.Component {
     render() {
 
         if (this.state.loadingError === true) {
-            return <Redirect to='/' />
+            return <Redirect to='/login' />
         }
 
 
         return (
             <div>
                 <Navbar bg="dark" variant="dark">
-                    <Navbar.Brand>
-                        <img
-                            alt=""
-                            src={logo}
-                            width="40"
-                            height="40"
-                            className="d-inline-block align-top float-left"
-                            style={{ marginTop: -10, marginRight: 40 }}
-                        />{'  '}
-                        <div style={{ fontSize: 23 }}>~Home~</div>
-                    </Navbar.Brand>
+                    <Link to={{
+                        pathname: '/',
+                        state: { user: this.state.userInput }
+                    }}>
+                        <Navbar.Brand>
+                            <img
+                                alt=""
+                                src={logo}
+                                width="40"
+                                height="40"
+                                className="d-inline-block align-top float-left"
+                                style={{ marginTop: -10, marginRight: 40 }}
+                            />{'  '}
+                            <div style={{ color: '#A8E0F7', fontSize: 23 }}>~Home~</div>
+                        </Navbar.Brand>
+                    </Link>
                 </Navbar>
 
 
@@ -147,6 +178,9 @@ export default class Profile extends React.Component {
                                     this.state.events && this.state.events.map(event =>
                                         <li key={event.id} className="nav">
                                             <button className="btn btn-primary">{event.description}
+                                            </button>
+                                            <button className="btn btn-primary" onClick={() => this.deleteEvent(event.id)} style={{ marginLeft: 10 }}>
+                                                <FontAwesomeIcon icon="trash-alt" />
                                             </button>
                                         </li>
                                     )
@@ -178,11 +212,9 @@ export default class Profile extends React.Component {
                         </div>
                     </div>
 
-                    <br />
-
                     {/* If error in updating profile */}
                     <div style={this.state.error === false ? { display: 'none' } : { 'padding-top': 0 }} >
-                        <h2 style={{ color: 'red', marginLeft: 100 }}> Must fill out each section to update profile. This ensures changes</h2>
+                        <h2 style={{ color: 'red', marginLeft: 100 }}> Every field must be filled out</h2>
                     </div>
 
 
@@ -228,6 +260,15 @@ export default class Profile extends React.Component {
                             <br />
                             <button onClick={this.checkUpdateUser} className="btn btn-info btn-block">Save Changes</button>
                         </div>
+                    </div>
+                    <br/>
+                    <div className="row">
+                        <div className="col-md-10 col-md-offset-1">
+                            <Link to="/login">
+                                <button className="btn btn-info float-right">Sign Out</button>
+                            </Link>
+                        </div>
+
                     </div>
                 </div>
             </div >
