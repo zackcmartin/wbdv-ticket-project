@@ -14,15 +14,16 @@ export default class StubHubController extends React.Component {
         super(props)
         this.state = {
             userInput: {
-                username: '',
-                password: '',
+                username: 'kr7908@gmail.com',
+                password: '123Welcome456!',
             },
             api_key_response: null,
             api_key: null,
             listings: null,
             orders: null,
             payments: null,
-            sales: null
+            sales: null,
+            concertName: ''
 
         }
         this.getAPIkey = this.getAPIkey.bind(this);
@@ -30,6 +31,7 @@ export default class StubHubController extends React.Component {
         this.getAllOrders = this.getAllOrders.bind(this)
         this.getAllPayments = this.getAllPayments.bind(this)
         this.getAllSales = this.getAllSales.bind(this)
+        this.getEvents = this.getEvents.bind(this)
     }
 
     async getAPIkey() {
@@ -229,6 +231,12 @@ export default class StubHubController extends React.Component {
                 isJsonData: prevState.isJsonData
             }))
         }
+    }
+
+    async getEvents(){
+        let response = await stubHubService.getEvents({name: this.state.concertName});
+        console.log(response)
+
     }
 
 
@@ -447,6 +455,19 @@ export default class StubHubController extends React.Component {
                         <pre style={{ 'text-align': 'left' }}> {this.state.currentOrder ? JSON.stringify(this.state.currentOrder) : null} </pre>
                     </div>
                 </div>
+                <div className={"row"} style={this.state.api_key === null ? { display: 'none' } : { 'padding-top': 30 }}>
+                    <div className={"col"}>
+                        <div>
+                            <h2>Search for Events</h2>
+                            <input
+                                value={this.state.concertName}
+                                placeholder="Concert Name" className="form-control"
+                                onChange={(e) => this.setState({concertName: e.currentTarget.value})} />
+                            <button onClick={this.getEvents} className="btn btn-primary btn-block">Search for events </button>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </div>)
