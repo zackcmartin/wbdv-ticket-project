@@ -1,6 +1,7 @@
 import React from 'react'
 
 import StubHubService from '../stubhub-service/StubHubService';
+import UserService from '../services/UserService'
 import { Link, Redirect } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
@@ -8,6 +9,7 @@ import logo from './logo.png';
 
 
 let stubHubService = StubHubService.getInstance();
+let userService = UserService.getInstance();
 
 export default class Login extends React.Component {
 
@@ -33,21 +35,6 @@ export default class Login extends React.Component {
 
 
 
-    createUser = (user) =>
-        fetch("https://wbdv-ticket-server.herokuapp.com/api/users/", {
-            method: 'POST',
-            body: JSON.stringify(user),
-            headers: {
-                'content-type': 'application/json',
-                'Accept': 'application/json',
-                'Access-Control-Allow-Credentials': true,
-                'Access-Control-Allow-Origin': true
-            },
-        })
-            .then(this.setState({ toSignIn: true }))
-
-
-
     checkCreateUser() {
 
         if (this.state.userInput.username == '' || this.state.userInput.password == '' ||
@@ -56,7 +43,7 @@ export default class Login extends React.Component {
         }
 
         else {
-            this.createUser(this.state.userInput)
+            userService.createUser(this.state.userInput).then(this.setState({ toSignIn: true }))
         }
 
     }

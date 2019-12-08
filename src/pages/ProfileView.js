@@ -116,7 +116,6 @@ export default class Profile extends React.Component {
 
     
     deleteUser() {
-        console.log("here")
         if(this.state.userInput.type !== 'admin'){
             fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}`, {
                 method: 'DELETE',

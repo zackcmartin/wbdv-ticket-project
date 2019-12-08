@@ -1,12 +1,14 @@
 import React from 'react'
 
 import StubHubService from '../stubhub-service/StubHubService';
+import UserService from '../services/UserService';
 import { Link, Redirect } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
 
 
 let stubHubService = StubHubService.getInstance();
+let userService = UserService.getInstance();
 
 export default class Login extends React.Component {
 
@@ -44,13 +46,6 @@ export default class Login extends React.Component {
         }))
     }
 
-
-    findUserByUserName = (username) =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${username}`)
-            .then(response => response.json()).catch(err => this.setState({ error: true }))
-
-
-
     checkUser() {
 
         if (this.state.userInput.username == '' || this.state.userInput.password == '') {
@@ -58,13 +53,12 @@ export default class Login extends React.Component {
         }
 
         else {
-            this.findUserByUserName(this.state.userInput.username).then(user => user.password === this.state.userInput.password ?
-                this.setState({ toProfile: true, userInput: { username: user.username, password: user.password, firstName: user.firstName, lastName: user.lastName, type: user.type } }) : this.setState({ wrongPassword: true, error: false })).catch(err => this.setState({ error: true, wrongPassword: false }))
+            userService.getUser(this.state.userInput.username).then(response => response.json()).catch(err => this.setState({ error: true })).then(user => user.password === this.state.userInput.password ?
+                this.setState({ toProfile: true, userInput: { username: user.username, password: user.password, firstName: user.firstName, lastName: user.lastName, type: user.type } }) 
+                : this.setState({ wrongPassword: true, error: false })).catch(err => this.setState({ error: true, wrongPassword: false }))
         }
 
     }
-
-
 
     render() {
 
