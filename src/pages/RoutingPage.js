@@ -9,7 +9,6 @@ import TicketPage from './TicketPage'
 
 import StubHubController from '../components/StubHubController'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import TicketPage from "./TicketPage";
 import Search from "./Search";
 import Details from "./Details"
 

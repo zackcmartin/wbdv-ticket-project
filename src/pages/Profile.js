@@ -1,6 +1,8 @@
 import React from 'react'
 
 import StubHubService from '../stubhub-service/StubHubService';
+import UserService from '../services/UserService';
+import EventService from '../services/EventService';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import logo from './logo.png';
@@ -14,6 +16,8 @@ import { Link, Redirect } from 'react-router-dom'
 library.add(faTrashAlt);
 
 let stubHubService = StubHubService.getInstance();
+let userService = UserService.getInstance();
+let eventService = EventService.getInstance();
 
 export default class Profile extends React.Component {
 
