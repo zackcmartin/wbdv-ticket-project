@@ -3,6 +3,7 @@ import React from 'react'
 import StubHubService from "../stubhub-service/StubHubService";
 import EventCard from "../components/EventCard";
 import {Link} from "react-router-dom";
+import queryString from 'query-string';
 
 let stubHubService = StubHubService.getInstance();
 
@@ -20,7 +21,19 @@ export default class Search extends React.Component {
     }
 
     componentDidMount() {
-        this.getAPIkey()
+        let cur_values = queryString.parse(this.props.location.search);
+        this.getAPIkey(() => {
+            if(cur_values.event_name){
+                this.getEvents(cur_values.event_name)
+            }})
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        let cur_values = queryString.parse(this.props.location.search);
+        let prev_values = queryString.parse(prevProps.location.search);
+        if (cur_values.event_name !==  prev_values.event_name && cur_values.event_name !== ""){
+            this.getEvents(cur_values.event_name)
+        }
     }
 
     render() {
@@ -32,10 +45,12 @@ export default class Search extends React.Component {
             </div>
             <div className={"row"}>
                 <div className={"col"}>
-                    <input className={"my-3 form-control"} value={this.state.concert_name}
-                           placeholder="Insert Concert you are searching for"
-                           onChange={(e) => this.setState({concert_name: e.currentTarget.value})} />
-                           <button onClick={this.getEvents} className="btn btn-dark btn-block" >Search for Concerts</button>
+                    <input className={"my-3 form-control"} value={this.state.event_name}
+                           placeholder="Insert event you are searching for"
+                           onChange={(e) => this.setState({event_name: e.currentTarget.value})} />
+                           <Link to={`/search?event_name=${this.state.event_name}`}>
+                           <button className="btn btn-dark btn-block" >Search for Events</button>
+                           </Link>
                 </div>
             </div>
             <div className="row">
@@ -58,20 +73,14 @@ export default class Search extends React.Component {
         </div>)
     }
 
-    async getAPIkey() {
+    async getAPIkey(then) {
         let response = await stubHubService.getAPItoken('kr7908@gmail.com', '123Welcome456!');
         stubHubService.setAccessToken(response.access_token)
-        console.log(response)
-        this.setState(({
-            username: '',
-            password: '',
-            api_key_response: response,
-            api_key: response.access_token,
-        }))
+        then()
     }
 
-    async getEvents() {
-        let response = await stubHubService.getEvents({name: this.state.concert_name})
+    async getEvents(event_name) {
+        let response = await stubHubService.getEvents({name: event_name})
         this.setState({event_many: response.events})
     }
 
