@@ -15,6 +15,7 @@ export default class TicketPage extends React.Component {
             selected_event: null,
             username: '',
             password: '',
+            concert_name: '',
             api_key_response: null,
             api_key: null,
             bins: [],
@@ -22,8 +23,14 @@ export default class TicketPage extends React.Component {
         };
 
         this.getAPIkey = this.getAPIkey.bind(this);
-        this.getReviews= this.getReviews.bind(this)
+        this.getReviews= this.getReviews.bind(this);
+        this.getEvents = this.getEvents.bind();
 
+    }
+
+    async getEvents() {
+        let response = await stubHubService.getEvents({name: this.state.concert_name})
+        console.log(response)
     }
 
     async getReviews(event_id) {
