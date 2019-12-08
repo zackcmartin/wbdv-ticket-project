@@ -5,6 +5,7 @@ import Register from './Register'
 import Profile from './Profile'
 import ProfileView from './ProfileView'
 import Users from './Users'
+import TicketPage from './TicketPage'
 
 import StubHubController from '../components/StubHubController'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
@@ -20,7 +21,7 @@ class RoutingPage extends React.Component {
                     <Route
                         exact
                         path="/"
-                        component={Login}/>
+                        component={TicketPage}/>
 
                     <Route
                         exact
@@ -45,6 +46,9 @@ class RoutingPage extends React.Component {
                                <Route path="/details"
                                       component={Details} />
 
+                    <Route
+                        path="/login"
+                        component={Login}/>
                 </div>
             </Router>
         )

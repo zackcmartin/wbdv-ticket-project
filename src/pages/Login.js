@@ -34,7 +34,10 @@ export default class Login extends React.Component {
         this.setState(({
             userInput: {
                 username: '',
-                password: ''
+                password: '',
+                firstName: '',
+                lastName: '',
+                type: ''
             },
             api_key_response: response,
             api_key: response.access_token,
@@ -56,7 +59,7 @@ export default class Login extends React.Component {
 
         else {
             this.findUserByUserName(this.state.userInput.username).then(user => user.password === this.state.userInput.password ?
-                this.setState({ toProfile: true }) : this.setState({ wrongPassword: true, error: false })).catch(err => this.setState({ error: true, wrongPassword: false }))
+                this.setState({ toProfile: true, userInput: { username: user.username, password: user.password, firstName: user.firstName, lastName: user.lastName, type: user.type } }) : this.setState({ wrongPassword: true, error: false })).catch(err => this.setState({ error: true, wrongPassword: false }))
         }
 
     }
@@ -68,8 +71,8 @@ export default class Login extends React.Component {
 
         if (this.state.toProfile === true) {
             return <Redirect to={{
-                pathname: '/users',
-                state: { username: this.state.userInput.username }
+                pathname: '/',
+                state: { user: this.state.userInput }
             }} />
         }
 
