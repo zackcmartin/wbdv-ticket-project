@@ -23,14 +23,26 @@ export default class ReviewService {
         console.log(`${this.url}api/users/${username}/reviews/${event_id}`)
         return await fetch(`${this.url}api/users/${username}/reviews/${event_id}`,{
             method: 'POST',
-            body: JSON.stringify(review)
+            body: JSON.stringify(review),
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Origin': true
+            }
         }).then(response => response.json())
     }
 
     async deleteReview(username, review_id){
         return await fetch(`${this.url}api/users/${username}/reviews/${review_id}`,
             {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Credentials': true,
+                    'Access-Control-Allow-Origin': true
+                }
             }).then(response => response.json())
     }
 }

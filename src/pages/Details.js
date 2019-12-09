@@ -43,14 +43,14 @@ export default class Details extends React.Component {
             reviews: [{ username: 'user_1', text: 'hello' }, { username: 'user_2', text: 'hello' }, { username: 'user_3', text: 'hello' }, { username: 'user_4', text: 'hello' }]
         }
 
-        // this.addReview = this.addReview.bind(this)
+        this.addReview = this.addReview.bind(this)
     }
 
     componentDidMount() {
         let { event_id} = this.props.match.params
 
         console.log(event_id)
-        // this.initialize()
+        this.initialize()
     }
 
     render() {
@@ -117,14 +117,14 @@ export default class Details extends React.Component {
         this.setState({new_review: e.target.value})
     }}
     className="form-control" id="commentinput" rows="3" placeholder={"Write how you feel about the concert"}/>
-                                    <button className={"btn btn-dark my-2"} onClick={() => {}}>Submit comment</button>
                                 </div>
                             </form>
+                            <button className={"btn btn-dark my-2"} onClick={this.addReview}>Submit comment</button>
                             {this.state.reviews.map(review =>
                                 <div className="card bg-light border-primary">
                                     <div className="card-body">
                                         <p className={"card-text"}>
-                                            {review.text}
+                                            {review.review}
                                         </p>
                                         <p className={"card-text "}>
                                             {`Commented by ${review.username}`}
@@ -157,13 +157,12 @@ export default class Details extends React.Component {
         this.setState({event: event_local, reviews: reviews})
     }
 
-    addReview(){
-        console.log('hello')
-        // let response = await reviewService.addReviewToEvent("george@gmail.com", this.state.event.id,
-        //     {review: this.state.new_review})
-        // let reviews_response = await reviewService.getReviewsForEvent(this.state.event.id)
-        // console.log(reviews_response)
-        // this.setState({reviews: reviews_response})
+    async addReview(){
+        let response = await reviewService.addReviewToEvent("george@gmail.com", this.state.event.id,
+            {review: this.state.new_review})
+        let reviews_response = await reviewService.getReviewsForEvent(this.state.event.id)
+        console.log(reviews_response)
+        this.setState({reviews: reviews_response})
 
     }
 }
