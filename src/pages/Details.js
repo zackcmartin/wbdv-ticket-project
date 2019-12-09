@@ -40,8 +40,8 @@ export default class Details extends React.Component {
         this.state = {
             userInput: userInput,
             noUser: noUser,
-            event: events[0],
-            reviews: [{ username: 'user_1', text: 'hello' }, { username: 'user_2', text: 'hello' }, { username: 'user_3', text: 'hello' }, { username: 'user_4', text: 'hello' }]
+            event: {description: '', eventDateLocal: '', performers: {name: ''}, venue: {name: ''}},
+            reviews: []
         }
 
         this.addReview = this.addReview.bind(this)
@@ -129,7 +129,7 @@ export default class Details extends React.Component {
                                             {review.review}
                                         </p>
                                         <p className={"card-text "}>
-                                            {`Commented by ${review.username}`}
+                                            {`Commented by ${review.user.username}`}
                                         </p>
                                     </div>
                                 </div>
@@ -150,12 +150,10 @@ export default class Details extends React.Component {
         stubHubService.setAccessToken()
         let eventResponse  = await stubHubService.getEvents({id: event_id})
         let event = eventResponse.events[0]
-        console.log(event)
+
         event.performers = event.performers.join(',')
         let event_local = await eventService.addEvent(event)
-        console.log(event_local)
         let reviews = await reviewService.getReviewsForEvent(event_local.id)
-        console.log(reviews)
         this.setState({event: event_local, reviews: reviews})
     }
 
@@ -163,12 +161,10 @@ export default class Details extends React.Component {
         let response = await reviewService.addReviewToEvent("george@gmail.com", this.state.event.id,
             {review: this.state.new_review})
         let reviews_response = await reviewService.getReviewsForEvent(this.state.event.id)
-        console.log(reviews_response)
         this.setState({reviews: reviews_response})
     }
 
     async addTrackedEvent() {
         let response = await userService.addTrackedEvent("george@gmail.com", this.state.event.id)
-
     }
 }
