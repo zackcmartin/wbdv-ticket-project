@@ -3,6 +3,10 @@ export default class UserService {
 
     static myInstance = null;
 
+    constructor() {
+        this.url = 'https://wbdv-ticket-server-kkhomiakov.herokuapp.com/'
+    }
+
     static getInstance() {
 
         if (this.myInstance == null) {
@@ -66,6 +70,19 @@ export default class UserService {
             'Access-Control-Allow-Origin': true
         },
     })
+
+    deleteReview = (username, review_id) =>
+        fetch(`${this.url}api/users/${username}/reviews/${review_id}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Credentials': true,
+                    'Access-Control-Allow-Origin': true
+                }
+            }).then(response => response.json())
+
 
 
 

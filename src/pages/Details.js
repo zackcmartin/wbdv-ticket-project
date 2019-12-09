@@ -6,6 +6,8 @@ import EventService from "../services/EventService";
 import UserService from "../services/UserService";
 import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
 import { Link, Redirect } from 'react-router-dom'
 
@@ -46,6 +48,7 @@ export default class Details extends React.Component {
 
         this.addReview = this.addReview.bind(this)
         this.addTrackedEvent = this.addTrackedEvent.bind(this)
+        this.deleteReview = this.deleteReview.bind(this)
     }
 
     componentDidMount() {
@@ -56,6 +59,8 @@ export default class Details extends React.Component {
     }
 
     render() {
+        console.log(this.state.reviews)
+        console.log(this.state.username)
         return (
 
             <div>
@@ -127,6 +132,8 @@ export default class Details extends React.Component {
                                     <div className="card-body">
                                         <p className={"card-text"}>
                                             {review.review}
+                                            {(review.user.username === this.state.username) &&
+                                            <FontAwesomeIcon className="float-right" onClick={() => this.deleteReview(review.id)} icon={faWindowClose} />}
                                         </p>
                                         <p className={"card-text "}>
                                             <Link to={`/profile/${review.user.username}`}>
@@ -168,5 +175,12 @@ export default class Details extends React.Component {
 
     async addTrackedEvent() {
         let response = await userService.addTrackedEvent("george@gmail.com", this.state.event.id)
+    }
+
+    async deleteReview(review_id) {
+        console.log(review_id)
+        let new_reviews = await userService.deleteReview("george@gmail.com",review_id)
+        console.log(new_reviews)
+        this.setState({reviews: new_reviews})
     }
 }
