@@ -119,7 +119,7 @@ export default class Login extends React.Component {
                                 placeholder="Stubhub password" className="form-control"
                                 onChange={(e) => this.state.userInput.password = e.currentTarget.value} />
                             <br />
-                            <button onClick={this.checkUser} className="btn btn-info btn-block">Sign In</button>
+                            <button onClick={this.checkUser} className="btn btn-dark btn-block">Sign In</button>
                         </div>
 
                     </div>
@@ -128,7 +128,7 @@ export default class Login extends React.Component {
                         <div class="col-md-10 col-md-offset-1">
                             <h4>Haven't Registered Yet?</h4>
                             <Link to={`/register`}>
-                                <button className="btn btn-info"> Sign up</button>
+                                <button className="btn btn-dark"> Sign up</button>
                             </Link>
                         </div>
                     </div>

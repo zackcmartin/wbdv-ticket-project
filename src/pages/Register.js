@@ -128,7 +128,7 @@ export default class Login extends React.Component {
                                 placeholder="Admin Password" className="form-control"
                                 onChange={(e) => this.state.userInput.type = e.currentTarget.value} />
                             <br />
-                            <button onClick={this.checkCreateUser} className="btn btn-info btn-block">Sign Up</button>
+                            <button onClick={this.checkCreateUser} className="btn btn-dark btn-block">Sign Up</button>
                         </div>
 
                     </div>
@@ -137,7 +137,7 @@ export default class Login extends React.Component {
                         <div class="col-md-10 col-md-offset-1">
                             <h4>Already Signed Up With Us?</h4>
                             <Link to={`/login`}>
-                                <button className="btn btn-info"> Sign In</button>
+                                <button className="btn btn-dark"> Sign In</button>
                             </Link>
                         </div>
                     </div>
