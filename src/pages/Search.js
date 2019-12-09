@@ -67,6 +67,7 @@ export default class Search extends React.Component {
     }
 
     render() {
+        console.log(this.state.userInput)
         return (
             <div>
                 <div style={this.state.noUser === true ? { 'padding-top': 0 } : { display: 'none' }} >

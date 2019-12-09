@@ -6,6 +6,7 @@ import StubHubService from "../stubhub-service/StubHubService";
 import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
 import { Link, Redirect } from 'react-router-dom'
+import moment from 'moment';
 
 let stubHubService = StubHubService.getInstance();
 
@@ -176,7 +177,7 @@ export default class TicketPage extends React.Component {
                                     key={event.id}
                                     className={"col-3 m-2"}
                                     title={event.name}
-                                    text={`${event.venue.name} at ${event.eventDateLocal}`}
+                                    text={`${event.venue.name} at ${moment(event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}
                                     button={button}
                                 />
                             );
@@ -196,7 +197,7 @@ export default class TicketPage extends React.Component {
                                     key={this.state.selected_event.id}
                                     className={"col-3 m-2"}
                                     title={this.state.selected_event.name}
-                                    text={`${this.state.selected_event.venue.name} at ${this.state.selected_event.eventDateLocal}`}
+                                    text={`${this.state.selected_event.venue.name} at ${moment(this.state.selected_event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}
                                 /></div>}
                             {this.state.reviews.map(review =>
                                 <div className="card bg-light border-dark">

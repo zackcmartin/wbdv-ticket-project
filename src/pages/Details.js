@@ -5,12 +5,14 @@ import ReviewService from "../services/ReviewService";
 import EventService from "../services/EventService";
 import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
+import moment from 'moment';
+
 
 import { Link, Redirect } from 'react-router-dom'
 
 let stubHubService = StubHubService.getInstance();
 let reviewService = ReviewService.getInstance();
-let eventService =  EventService.getInstance();
+let eventService = EventService.getInstance();
 
 
 
@@ -47,13 +49,14 @@ export default class Details extends React.Component {
     }
 
     componentDidMount() {
-        let { event_id} = this.props.match.params
+        let { event_id } = this.props.match.params
 
         console.log(event_id)
         // this.initialize()
     }
 
     render() {
+        console.log("here" + this.state.userInput.firstName)
         return (
 
             <div>
@@ -100,7 +103,7 @@ export default class Details extends React.Component {
                             <div className="card">
                                 <div className="card-body bg-light mb-3">
                                     <p className="card-text">{this.state.event.description}</p>
-                                    <p className="card-text">{`Save the date: ${this.state.event.eventDateLocal}`}</p>
+                                    <p className="card-text">{`Save the date: ${moment(this.state.event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}</p>
                                     <p className="card-text">{`Get excited to see ${this.state.event.performers.name} to play at ${this.state.event.venue.name}`} </p>
                                 </div>
                             </div>
@@ -113,11 +116,11 @@ export default class Details extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="commentinput">Write a comment!</label>
                                     <textarea value={this.state.new_review}
-    onChange={(e) => {
-        this.setState({new_review: e.target.value})
-    }}
-    className="form-control" id="commentinput" rows="3" placeholder={"Write how you feel about the concert"}/>
-                                    <button className={"btn btn-dark my-2"} onClick={() => {}}>Submit comment</button>
+                                        onChange={(e) => {
+                                            this.setState({ new_review: e.target.value })
+                                        }}
+                                        className="form-control" id="commentinput" rows="3" placeholder={"Write how you feel about the concert"} />
+                                    <button className={"btn btn-dark my-2"} onClick={() => { }}>Submit comment</button>
                                 </div>
                             </form>
                             {this.state.reviews.map(review =>
@@ -140,13 +143,13 @@ export default class Details extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div> )
-        }
+            </div>)
+    }
 
-    async initialize(){
-        let { event_id} = this.props.match.params
+    async initialize() {
+        let { event_id } = this.props.match.params
         stubHubService.setAccessToken()
-        let eventResponse  = await stubHubService.getEvents({id: event_id})
+        let eventResponse = await stubHubService.getEvents({ id: event_id })
         let event = eventResponse.events[0]
         console.log(event)
         event.performers = event.performers.join(',')
@@ -154,10 +157,10 @@ export default class Details extends React.Component {
         console.log(event_local)
         let reviews = await reviewService.getReviewsForEvent(event_local.id)
         console.log(reviews)
-        this.setState({event: event_local, reviews: reviews})
+        this.setState({ event: event_local, reviews: reviews })
     }
 
-    addReview(){
+    addReview() {
         console.log('hello')
         // let response = await reviewService.addReviewToEvent("george@gmail.com", this.state.event.id,
         //     {review: this.state.new_review})
