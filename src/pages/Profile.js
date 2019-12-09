@@ -54,6 +54,8 @@ export default class Profile extends React.Component {
 
         this.checkUpdateUser = this.checkUpdateUser.bind(this);
         this.getAllListings = this.getAllListings.bind(this);
+        this.deleteEvent = this.deleteEvent.bind(this);
+        this.getEvents = this.getEvents.bind(this);
     }
 
 
@@ -95,6 +97,14 @@ export default class Profile extends React.Component {
             userService.updateUser(this.state.userInput, this.state.userInput.username)
         }
 
+    }
+
+    deleteEvent(eventId) {
+        eventService.deleteEvent(this.state.userInput.username, eventId).then(() => this.getEvents())
+    }
+
+    getEvents(){
+        eventService.getEvents(this.state.userInput.username).then(response => response.json()).then(events => this.setState({events: events})).catch(err => this.setState({ error: true }))
     }
 
 
@@ -147,7 +157,7 @@ export default class Profile extends React.Component {
                                         <li key={event.id} className="nav">
                                             <button className="btn btn-dark">{event.description}
                                             </button>
-                                            <button className="btn btn-dark" onClick={() => eventService.deleteEvent(this.state.userInput.username, event.id).then(eventService.getEvents(this.state.userInput.username)).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))} style={{ marginLeft: 10 }}>
+                                            <button className="btn btn-dark" onClick={() => this.deleteEvent(event.id)} style={{ marginLeft: 10 }}>
                                                 <FontAwesomeIcon icon="trash-alt" />
                                             </button>
                                         </li>

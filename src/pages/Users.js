@@ -51,7 +51,6 @@ export default class Users extends React.Component {
     componentDidMount() {
         userService.getAllUsers()
             .then(response => response.json()).then(users => this.setState({ users: users })).catch(err => this.setState({ error: true }))
-
     }
 
 

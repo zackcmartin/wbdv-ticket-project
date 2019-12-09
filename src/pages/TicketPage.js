@@ -27,6 +27,7 @@ export default class TicketPage extends React.Component {
         };
 
         try {
+            console.log("here" + this.props.location.state.user)
             userInput = this.props.location.state.user
             if (this.props.location.state.user.username == '') {
                 noUser = true;
@@ -86,6 +87,7 @@ export default class TicketPage extends React.Component {
     }
 
     render() {
+        console.log("user input" + JSON.stringify(this.state.userInput))
         return (
             <div>
                 <div style={this.state.noUser === true ? { 'padding-top': 0 } : { display: 'none' }} >
