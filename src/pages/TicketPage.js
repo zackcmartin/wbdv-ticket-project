@@ -133,7 +133,7 @@ export default class TicketPage extends React.Component {
                     <div style={this.state.noUser === true ? { 'padding-top': 0 } : { display: 'none' }} >
                         <div className="row">
                             <div className="col-md-10 col-md-offset-1">
-                                <h1 style={{ color: '#353A40', fontSize: 20 }}>You are not signed in. For more website functionality <Link to={`/login`}><button type="button" className="btn btn-info">Sign In</button></Link>. No account yet? <Link to={`/register`}><button type="button" className="btn btn-info">Sign up!</button></Link></h1>
+                                <h1 style={{ color: '#353A40', fontSize: 20 }}>You are not signed in. For more website functionality <Link to={`/login`}><button type="button" className="btn btn-dark">Sign In</button></Link>. No account yet? <Link to={`/register`}><button type="button" className="btn btn-dark">Sign up!</button></Link></h1>
                             </div>
                         </div>
                     </div>
@@ -199,7 +199,7 @@ export default class TicketPage extends React.Component {
                                     text={`${this.state.selected_event.venue.name} at ${this.state.selected_event.eventDateLocal}`}
                                 /></div>}
                             {this.state.reviews.map(review =>
-                                <div className="card bg-light border-primary">
+                                <div className="card bg-light border-dark">
                                     <div className="card-body">
                                         <p className={"card-text"}>
                                             {review.text}

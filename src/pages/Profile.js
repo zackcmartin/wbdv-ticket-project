@@ -145,9 +145,9 @@ export default class Profile extends React.Component {
                                 {
                                     this.state.events && this.state.events.map(event =>
                                         <li key={event.id} className="nav">
-                                            <button className="btn btn-primary">{event.description}
+                                            <button className="btn btn-dark">{event.description}
                                             </button>
-                                            <button className="btn btn-primary" onClick={() => eventService.deleteEvent(event.id).then(eventService.getEvents())} style={{ marginLeft: 10 }}>
+                                            <button className="btn btn-dark" onClick={() => eventService.deleteEvent(event.id).then(eventService.getEvents())} style={{ marginLeft: 10 }}>
                                                 <FontAwesomeIcon icon="trash-alt" />
                                             </button>
                                         </li>
@@ -168,7 +168,7 @@ export default class Profile extends React.Component {
                     <div className="row">
                         <div className="col-md-10 col-md-offset-1">
                             <h1>Your Listings</h1>
-                            <button onClick={this.getAllListings} className="btn btn-primary">Show Listings</button>
+                            <button onClick={this.getAllListings} className="btn btn-dark">Show Listings</button>
                             <ul className="list-group">
                                 {this.state.listingArray && this.state.listingArray.map((listing) => (
                                     <li className="list-group">
@@ -229,14 +229,14 @@ export default class Profile extends React.Component {
                                     }
                                 })} />
                             <br />
-                            <button onClick={this.checkUpdateUser} className="btn btn-info btn-block">Save Changes</button>
+                            <button onClick={this.checkUpdateUser} className="btn btn-dark btn-block">Save Changes</button>
                         </div>
                     </div>
                     <br/>
                     <div className="row">
                         <div className="col-md-10 col-md-offset-1">
                             <Link to="/login">
-                                <button className="btn btn-info float-right">Sign Out</button>
+                                <button className="btn btn-dark float-right">Sign Out</button>
                             </Link>
                         </div>
 

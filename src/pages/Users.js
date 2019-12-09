@@ -85,7 +85,7 @@ export default class Users extends React.Component {
                 <div style={this.state.noUser === true ? { 'padding-top': 0 } : { display: 'none' }} >
                         <div className="row">
                             <div className="col-md-10 col-md-offset-1">
-                                <h1 style={{ color: '#353A40', fontSize: 20 }}>You are not signed in. For more website functionality <Link to={`/login`}><button type="button" className="btn btn-info">Sign In</button></Link>. No account yet? <Link to={`/register`}><button type="button" className="btn btn-info">Sign up!</button></Link></h1>
+                                <h1 style={{ color: '#353A40', fontSize: 20 }}>You are not signed in. For more website functionality <Link to={`/login`}><button type="button" className="btn btn-dark">Sign In</button></Link>. No account yet? <Link to={`/register`}><button type="button" className="btn btn-dark">Sign up!</button></Link></h1>
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ export default class Users extends React.Component {
                                         <Link to={{
                                             pathname: `/profile/${user.username}`,
                                             state: {user: this.state.userInput}}}>
-                                            <button className="btn btn-info  btn-block">
+                                            <button className="btn btn-dark  btn-block">
                                                 <div style={{ fontSize: 15 }}>{user.firstName} {user.lastName}</div>
                                             </button>
                                         </Link>
