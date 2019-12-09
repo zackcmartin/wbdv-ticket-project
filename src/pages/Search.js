@@ -33,6 +33,9 @@ export default class Search extends React.Component {
 
         try {
             userInput = this.props.location.state.user
+            if (this.props.location.state.user.username == '') {
+                noUser = true;
+            }
         }
         catch{
             noUser = true;
@@ -50,10 +53,6 @@ export default class Search extends React.Component {
     }
 
     componentDidMount() {
-    
-        userService.getUser(this.state.userInput.username)
-            .then(response => response.json()).then(user => this.setState({ userInput: user })).catch(err => this.setState({ error: true }))
-
         let cur_values = queryString.parse(this.props.location.search);
         stubHubService.setAccessToken()
         if(cur_values.event_name){
@@ -70,6 +69,7 @@ export default class Search extends React.Component {
     }
 
     render() {
+        console.log(JSON.stringify(this.state.userInput))
         return (
             <div>
                 <div style={this.state.noUser === true ? { 'padding-top': 0 } : { display: 'none' }} >
