@@ -2,6 +2,9 @@ export default class EventService {
 
     static myInstance = null;
 
+    constructor() {
+        this.url = 'https://wbdv-ticket-server-kkhomiakov.herokuapp.com/'
+    }
     static getInstance() {
 
         if (this.myInstance == null) {
@@ -11,7 +14,7 @@ export default class EventService {
     }
 
     deleteEvent = (username, eventId) =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${username}/events/${eventId}`, {
+        fetch(`${this.url}api/users/${username}/events/${eventId}`, {
             method: 'DELETE',
             body: JSON.stringify(eventId),
             headers: {
@@ -24,12 +27,12 @@ export default class EventService {
 
 
     getEvents = (username) =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${username}/events`)
+        fetch(`${this.url}api/users/${username}/events`)
 
 
 
     addEvent = (event) =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/events`, {
+        fetch(`${this.url}api/events`, {
             method: 'POST',
             body: JSON.stringify(event),
             headers: {
@@ -38,7 +41,7 @@ export default class EventService {
                 'Access-Control-Allow-Credentials': true,
                 'Access-Control-Allow-Origin': true
             },
-        }).then(response => response.json())``
+        }).then(response => response.json())
 
 
 

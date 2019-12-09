@@ -126,7 +126,7 @@ export default class Search extends React.Component {
                         {this.state.event_many && this.state.event_many.map(event => {
                             let button = (
                                 <Link to={{
-                                    pathname: '/details/${event.id}',
+                                    pathname: `/details/${event.id}`,
                                     state: { user: this.state.userInput }
                                 }}>
                                     <button type="button" className="btn btn-dark">Go to event</button>

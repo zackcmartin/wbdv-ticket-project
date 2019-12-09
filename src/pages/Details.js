@@ -3,15 +3,16 @@ import events from "../data/events";
 import StubHubService from "../stubhub-service/StubHubService";
 import ReviewService from "../services/ReviewService";
 import EventService from "../services/EventService";
+import Navbar from 'react-bootstrap/Navbar'
+import logo from './logo.png';
+
+import { Link, Redirect } from 'react-router-dom'
 
 let stubHubService = StubHubService.getInstance();
 let reviewService = ReviewService.getInstance();
 let eventService =  EventService.getInstance();
 
-import Navbar from 'react-bootstrap/Navbar'
-import logo from './logo.png';
 
-import { Link, Redirect } from 'react-router-dom'
 
 
 export default class Details extends React.Component {
@@ -41,13 +42,15 @@ export default class Details extends React.Component {
             event: events[0],
             reviews: [{ username: 'user_1', text: 'hello' }, { username: 'user_2', text: 'hello' }, { username: 'user_3', text: 'hello' }, { username: 'user_4', text: 'hello' }]
         }
+
+        // this.addReview = this.addReview.bind(this)
     }
 
     componentDidMount() {
         let { event_id} = this.props.match.params
 
         console.log(event_id)
-        this.initialize()
+        // this.initialize()
     }
 
     render() {
@@ -109,8 +112,12 @@ export default class Details extends React.Component {
                             <form>
                                 <div className="form-group">
                                     <label htmlFor="commentinput">Write a comment!</label>
-                                    <textarea className="form-control" id="commentinput" rows="3" placeholder={"Write how you feel about the concert"}></textarea>
-                                    <button className="btn btn-dark my-2" onClick={() => { /** TODO service to add reviews **/ }}>Submit comment</button>
+                                    <textarea value={this.state.new_review}
+    onChange={(e) => {
+        this.setState({new_review: e.target.value})
+    }}
+    className="form-control" id="commentinput" rows="3" placeholder={"Write how you feel about the concert"}/>
+                                    <button className={"btn btn-dark my-2"} onClick={() => {}}>Submit comment</button>
                                 </div>
                             </form>
                             {this.state.reviews.map(review =>
@@ -129,7 +136,7 @@ export default class Details extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col offset-md-4">
-                            <button className="btn btn-dark my-4" onClick={() => {/** TODO service to add event**/ }}>Add event to your tracked events</button>
+                            <button className="btn btn-dark my-4" >Add event to your tracked events</button>
                         </div>
                     </div>
                 </div>
@@ -145,6 +152,18 @@ export default class Details extends React.Component {
         event.performers = event.performers.join(',')
         let event_local = await eventService.addEvent(event)
         console.log(event_local)
+        let reviews = await reviewService.getReviewsForEvent(event_local.id)
+        console.log(reviews)
+        this.setState({event: event_local, reviews: reviews})
+    }
+
+    addReview(){
+        console.log('hello')
+        // let response = await reviewService.addReviewToEvent("george@gmail.com", this.state.event.id,
+        //     {review: this.state.new_review})
+        // let reviews_response = await reviewService.getReviewsForEvent(this.state.event.id)
+        // console.log(reviews_response)
+        // this.setState({reviews: reviews_response})
 
     }
 }
