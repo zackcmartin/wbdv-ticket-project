@@ -8,6 +8,7 @@ import queryString from 'query-string';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import logo from './logo.png';
+import moment from 'moment';
 
 let stubHubService = StubHubService.getInstance();
 let userService = UserService.getInstance();
@@ -142,7 +143,7 @@ export default class Search extends React.Component {
                                 key={event.id}
                                 className={"col-3 m-2"}
                                 title={event.name}
-                                text={`${event.venue.name} at ${event.eventDateLocal}`}
+                                text={`${event.venue.name} at ${moment(event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}
                                 button={button}
                             />
                         })
