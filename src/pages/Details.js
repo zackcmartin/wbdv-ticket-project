@@ -1,5 +1,12 @@
 import React from 'react'
 import events from "../data/events";
+import StubHubService from "../stubhub-service/StubHubService";
+import ReviewService from "../services/ReviewService";
+import EventService from "../services/EventService";
+
+let stubHubService = StubHubService.getInstance();
+let reviewService = ReviewService.getInstance();
+let eventService =  EventService.getInstance();
 
 export default class Details extends React.Component {
 
@@ -9,6 +16,13 @@ export default class Details extends React.Component {
             event: events[0],
             reviews: [{username: 'user_1',text: 'hello' },{username: 'user_2',text: 'hello' },{username: 'user_3',text: 'hello' },{username: 'user_4',text: 'hello' }]
         }
+    }
+
+    componentDidMount() {
+        let { event_id} = this.props.match.params
+
+        console.log(event_id)
+        this.initialize()
     }
 
     render() {
@@ -57,4 +71,18 @@ export default class Details extends React.Component {
             </div>
         </div>
         }
+
+    async initialize(){
+        let { event_id} = this.props.match.params
+        stubHubService.setAccessToken()
+        let eventResponse  = await stubHubService.getEvents({id: event_id})
+        let event = eventResponse.events[0]
+        console.log(event)
+        event.performers = event.performers.join(',')
+        let event_local = await eventService.addEvent(event)
+        console.log(event_local)
+
+    }
+
+
 }

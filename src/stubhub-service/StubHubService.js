@@ -20,9 +20,10 @@ export default class StubHubService {
         return this.myInstance
     }
 
-    setAccessToken (access_token){
+    setAccessToken (access_token = 'VRGm8vAS1SuXJDKe7P3oqMXVnL2S'){
         this.access_token = access_token
     }
+
 
     async getAPItoken(email, pass) {
         let proxyUrl = 'https://cors-anywhere.herokuapp.com/'

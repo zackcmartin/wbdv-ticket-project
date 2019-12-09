@@ -22,10 +22,10 @@ export default class Search extends React.Component {
 
     componentDidMount() {
         let cur_values = queryString.parse(this.props.location.search);
-        this.getAPIkey(() => {
-            if(cur_values.event_name){
-                this.getEvents(cur_values.event_name)
-            }})
+        stubHubService.setAccessToken()
+        if(cur_values.event_name){
+            this.getEvents(cur_values.event_name)
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -73,10 +73,11 @@ export default class Search extends React.Component {
         </div>)
     }
 
-    async getAPIkey(then) {
+
+
+    async getAPIkey() {
         let response = await stubHubService.getAPItoken('kr7908@gmail.com', '123Welcome456!');
         stubHubService.setAccessToken(response.access_token)
-        then()
     }
 
     async getEvents(event_name) {

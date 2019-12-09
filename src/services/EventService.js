@@ -38,7 +38,7 @@ export default class EventService {
                 'Access-Control-Allow-Credentials': true,
                 'Access-Control-Allow-Origin': true
             },
-        })
+        }).then(response => response.json())``
 
 
 
