@@ -68,6 +68,7 @@ export default class Profile extends React.Component {
         }
         this.getAllListings = this.getAllListings.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
+        this.checkUpdateUser = this.checkUpdateUser.bind(this);
     }
 
 
@@ -235,7 +236,7 @@ export default class Profile extends React.Component {
                         </div>
                     </div>
 
-                    <div style={this.state.userInput.type === 'admin' ? { 'padding-top': 0 } : { display: 'none' } } className="row">
+                    <div style={this.state.viewerInput.type === 'admin' ? { 'padding-top': 0 } : { display: 'none' } } className="row">
                         <div className="col-md-10 col-md-offset-1">
                             <h1>Edit Profile</h1>
                             <h5>First Name:</h5>
