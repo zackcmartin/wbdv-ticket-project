@@ -1,6 +1,8 @@
 import React from 'react'
 
 import StubHubService from '../stubhub-service/StubHubService';
+import UserService from '../services/UserService';
+import EventService from '../services/EventService';
 import { Link, Redirect } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -16,6 +18,8 @@ library.add(faTrashAlt);
 
 
 let stubHubService = StubHubService.getInstance();
+let userService = UserService.getInstance();
+let eventService = EventService.getInstance();
 
 export default class Profile extends React.Component {
 
@@ -67,11 +71,10 @@ export default class Profile extends React.Component {
 
 
     componentDidMount() {
+        userService.getUser(this.state.userInput.username)
+        .then(response => response.json()).then(user => this.setState({ userInput: user })).catch(err => this.setState({ error: true }))
 
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}`)
-            .then(response => response.json()).then(user => this.setState({ userInput: user })).catch(err => this.setState({ error: true }))
-
-            this.getEvents()
+    eventService.getEvents(this.state.userInput.username).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))
     }
 
 
@@ -93,42 +96,13 @@ export default class Profile extends React.Component {
 
 
 
-    getEvents = () => {
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}/events`)
-            .then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))
-    }
 
-
-
-    deleteEvent = (eventId) =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}/events/${eventId}`, {
-            method: 'DELETE',
-            body: JSON.stringify(eventId),
-            headers: {
-                'content-type': 'application/json',
-                'Accept': 'application/json',
-                'Access-Control-Allow-Credentials': true,
-                'Access-Control-Allow-Origin': true
-            },
-        })
-            .then(() => this.getEvents())
-
-
-    
     deleteUser() {
-        if(this.state.userInput.type !== 'admin'){
-            fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}`, {
-                method: 'DELETE',
-                headers: {
-                    'content-type': 'application/json',
-                    'Accept': 'application/json',
-                    'Access-Control-Allow-Credentials': true,
-                    'Access-Control-Allow-Origin': true
-                },
-            }).then(this.setState({toUserList: true}))
+        if (this.state.userInput.type !== 'admin') {
+            userService.deleteUser(this.state.userInput.username).then(this.setState({ toUserList: true }))
         }
-        else{
-            this.setState({error: true})
+        else {
+            this.setState({ error: true })
         }
 
     }
@@ -141,7 +115,7 @@ export default class Profile extends React.Component {
             return <Redirect to={{
                 pathname: '/',
                 state: { user: this.state.viewerInput, userDelete: true }
-            }}  />
+            }} />
         }
 
         return (
@@ -168,8 +142,8 @@ export default class Profile extends React.Component {
 
 
                 <div className="container-fluid" style={{ 'padding-top': 10 }}>
-                
-                <div style={this.state.error === true ? { 'padding-top': 0 } : { display: 'none' }} >
+
+                    <div style={this.state.error === true ? { 'padding-top': 0 } : { display: 'none' }} >
                         <div className="row">
                             <div className="col-md-10 col-md-offset-1">
                                 <h1 style={{ color: 'red', fontSize: 20 }}>You are trying to delete an admin user. Admin users cannot be deleted.</h1>
@@ -177,7 +151,7 @@ export default class Profile extends React.Component {
                         </div>
                     </div>
 
-                <div style={this.state.viewerInput.type === 'admin' ? { 'padding-top': 0 } : { display: 'none' }} >
+                    <div style={this.state.viewerInput.type === 'admin' ? { 'padding-top': 0 } : { display: 'none' }} >
                         <div className="row">
                             <div className="col-md-10 col-md-offset-1">
                                 <h1 style={{ color: 'green', fontSize: 20 }}>As an admin, you have the ability to edit this user and delete them if necessary.</h1>
@@ -191,7 +165,7 @@ export default class Profile extends React.Component {
                     <div style={this.state.noUser === true ? { 'padding-top': 0 } : { display: 'none' }} >
                         <div className="row">
                             <div className="col-md-10 col-md-offset-1">
-                                <h1 style={{ color: '#353A40', fontSize: 20 }}>You are not signed in. For more website functionality <Link to={`/login`}><button type="button" className="btn btn-info">Sign In</button></Link>. No account yet? <Link to={`/login`}><button type="button" className="btn btn-info">Sign up!</button></Link></h1>
+                                <h1 style={{ color: '#353A40', fontSize: 20 }}>You are not signed in. For more website functionality <Link to={`/login`}><button type="button" className="btn btn-info">Sign In</button></Link>. No account yet? <Link to={`/register`}><button type="button" className="btn btn-info">Sign up!</button></Link></h1>
                             </div>
                         </div>
                     </div>
@@ -206,7 +180,7 @@ export default class Profile extends React.Component {
                                             <button className="btn btn-primary">{event.description}
                                             </button>
                                             <div style={this.state.viewerInput.type === 'admin' ? { 'padding-top': 0 } : { display: 'none' }} >
-                                                <button className="btn btn-primary" style={{ marginLeft: 10 }} onClick={() => this.deleteEvent(event.id)}>
+                                                <button className="btn btn-primary" style={{ marginLeft: 10 }} onClick={() => eventService.deleteEvent(event.id).then(eventService.getEvents(this.state.userInput.username)).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))}>
                                                     <FontAwesomeIcon icon="trash-alt" />
                                                 </button>
                                             </div>

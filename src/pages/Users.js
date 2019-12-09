@@ -1,12 +1,14 @@
 import React from 'react'
 
 import StubHubService from '../stubhub-service/StubHubService';
+import UserService from '../services/UserService';
 import { Link, Redirect } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
 
 
 let stubHubService = StubHubService.getInstance();
+let userService = UserService.getInstance();
 
 export default class Users extends React.Component {
 
@@ -47,7 +49,7 @@ export default class Users extends React.Component {
 
 
     componentDidMount() {
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/`)
+        userService.getAllUsers()
             .then(response => response.json()).then(users => this.setState({ users: users })).catch(err => this.setState({ error: true }))
 
     }
@@ -83,7 +85,7 @@ export default class Users extends React.Component {
                 <div style={this.state.noUser === true ? { 'padding-top': 0 } : { display: 'none' }} >
                         <div className="row">
                             <div className="col-md-10 col-md-offset-1">
-                                <h1 style={{ color: '#353A40', fontSize: 20 }}>You are not signed in. For more website functionality <Link to={`/login`}><button type="button" className="btn btn-info">Sign In</button></Link>. No account yet? <Link to={`/login`}><button type="button" className="btn btn-info">Sign up!</button></Link></h1>
+                                <h1 style={{ color: '#353A40', fontSize: 20 }}>You are not signed in. For more website functionality <Link to={`/login`}><button type="button" className="btn btn-info">Sign In</button></Link>. No account yet? <Link to={`/register`}><button type="button" className="btn btn-info">Sign up!</button></Link></h1>
                             </div>
                         </div>
                     </div>
