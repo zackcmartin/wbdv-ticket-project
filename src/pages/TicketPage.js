@@ -7,8 +7,16 @@ import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
 import { Link, Redirect } from 'react-router-dom'
 import moment from 'moment';
+import UserService from "../services/UserService";
+import EventService from "../services/EventService";
+import ReviewService from "../services/ReviewService";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faWindowClose} from "@fortawesome/free-solid-svg-icons";
 
 let stubHubService = StubHubService.getInstance();
+let userService = UserService.getInstance();
+let eventService = EventService.getInstance()
+let reviewService = ReviewService.getInstance()
 
 
 export default class TicketPage extends React.Component {
@@ -45,7 +53,7 @@ export default class TicketPage extends React.Component {
         this.state = {
             userInput: userInput,
             noUser: noUser,
-            event_many: events,
+            event_many: [],
             selected_event: null,
             username: '',
             password: '',
@@ -53,30 +61,37 @@ export default class TicketPage extends React.Component {
             api_key_response: null,
             api_key: null,
             bins: [],
-            reviews: [{ username: 'user_1', text: 'hello' }, { username: 'user_2', text: 'hello' }, { username: 'user_3', text: 'hello' }, { username: 'user_4', text: 'hello' }],
+            reviews: [],
             userDelete: userDelete
         };
 
         this.getAPIkey = this.getAPIkey.bind(this);
-        this.getReviews= this.getReviews.bind(this);
-        this.getEvents = this.getEvents.bind();
-
+        this.getTrackedEvents = this.getTrackedEvents.bind(this);
     }
 
-    async getEvents() {
-        let response = await stubHubService.getEvents({name: this.state.concert_name})
-        console.log(response)
+    componentDidMount() {
+        if(!this.state.noUser){
+            this.getTrackedEvents()
+        }
+        else {
+            this.getRecentReviews()
+        }
     }
 
-    async getReviews(event_id) {
-        // let response = await stubHubService.getEventListings(event_id);
-        // let event_service = new EventService(response)
+    async getTrackedEvents(){
+        let trackedEvents = await eventService.getEvents(this.state.userInput.username).then(response => response.json())
+        this.setState({event_many: trackedEvents})
     }
+
+    async getRecentReviews(){
+        let recent_reviews = await reviewService.getLast5Reviews()
+        this.setState({reviews: recent_reviews})
+    }
+
 
     async getAPIkey() {
         let response = await stubHubService.getAPItoken(this.state.userInput.username, this.state.userInput.password);
         stubHubService.setAccessToken(response.access_token)
-        console.log(response)
         this.setState(({
             username: '',
             password: '',
@@ -158,34 +173,57 @@ export default class TicketPage extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col">
-                            <h3>Tracked Events</h3>
-                            <h5>Add Tracked Events</h5>
-
+                            {!this.state.noUser && (<div>
+                                <h3>Tracked Events</h3>
+                                <h5>Add Tracked Events</h5>
+                            </div>)}
+                            {this.state.noUser && (
+                                <div>
+                                    <h3>These are some of the most recent reviews added on our website. Sign up now to see more!</h3>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="row">
-                        {!this.selected_event && this.state.event_many.map(event => {
+                        {this.state.noUser && this.state.reviews.map(review =>
+                            <div className="col-md-3 m-2 col-12">
+                                <div className="card bg-light border-primary">
+                                    <div className="card-body">
+                                        <p className={"card-text"}>
+                                            {review.review}
+                                       </p>
+                                        <p className={"card-text "}>
+                                            <Link to={{ pathname: `/profile/${review.user.username}`,
+                                                state: { user: this.state.userInput }
+                                            }}>
+                                                {`Commented by ${review.user.username}`}
+                                            </Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        {!this.state.noUser && this.state.event_many.map(event => {
                             let button = (
                                 <Link to={{
                                     pathname: `/details/${event.id}`,
-                                    state: { userInput: this.state.userInput }
+                                    state: { user: this.state.userInput }
                                 }}>
                                 <button type="button" className="btn btn-dark">
-                                    Load Data
+                                    Go to event
                                 </button>
                                 </Link>
                             );
                             return (
                                 <EventCard
                                     key={event.id}
-                                    className={"col-3 m-2 col-sm-10"}
+                                    className={"col-md-3 m-2 col-12"}
                                     title={event.name}
                                     text={`${event.venue.name} at ${moment(event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}
                                     button={button}
                                 />
                             );
                         })}
-
                     </div>
                 </div>
             </div>

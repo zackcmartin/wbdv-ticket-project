@@ -32,7 +32,6 @@ export default class StubHubService {
             username: email,
             password: pass
         }
-        console.log(JSON.stringify(requestBody))
         const response =  await fetch(proxyUrl + url, {
             method: 'post',
             body: JSON.stringify(requestBody),
@@ -140,7 +139,6 @@ export default class StubHubService {
         let finalUrl = buildUrl(proxyUrl+url, {
             queryParams: queryParams
         })
-        console.log(finalUrl)
         const response =  await fetch(finalUrl, {
             method: 'get',
             headers: {

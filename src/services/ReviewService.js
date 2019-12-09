@@ -19,8 +19,6 @@ export default class ReviewService {
     }
 
     async addReviewToEvent(username, event_id, review) {
-
-        console.log(`${this.url}api/users/${username}/reviews/${event_id}`)
         return await fetch(`${this.url}api/users/${username}/reviews/${event_id}`,{
             method: 'POST',
             body: JSON.stringify(review),
@@ -31,6 +29,10 @@ export default class ReviewService {
                 'Access-Control-Allow-Origin': true
             }
         }).then(response => response.json())
+    }
+
+    async getLast5Reviews() {
+        return await fetch(`${this.url}api/reviews/last=5`).then(response => response.json())
     }
 
 

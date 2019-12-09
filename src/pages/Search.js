@@ -9,6 +9,8 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import logo from './logo.png';
 import moment from 'moment';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faWindowClose} from "@fortawesome/free-solid-svg-icons";
 
 let stubHubService = StubHubService.getInstance();
 let userService = UserService.getInstance();
@@ -131,24 +133,26 @@ export default class Search extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        {this.state.event_many && this.state.event_many.map(event => {
+                        {this.state.event_many.map(event => {
                             let button = (
                                 <Link to={{
                                     pathname: `/details/${event.id}`,
-                                    state: { userInput: this.state.userInput }
+                                    state: { user: this.state.userInput }
                                 }}>
                                     <button type="button" className="btn btn-dark">Go to event</button>
                                 </Link>
                             );
                             return <EventCard
                                 key={event.id}
-                                className={"col-3 m-2"}
+                                className={"col-md-3 m-2 col-12"}
                                 title={event.name}
                                 text={`${event.venue.name} at ${moment(event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}
                                 button={button}
                             />
-                        })
-                        }
+                        })}
+
+
+
                     </div>
                 </div>
             </div>)

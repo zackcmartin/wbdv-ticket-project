@@ -235,8 +235,6 @@ export default class StubHubController extends React.Component {
 
     async getEvents(){
         let response = await stubHubService.getEvents({name: this.state.concertName});
-        console.log(response)
-
     }
 
 
@@ -350,7 +348,6 @@ export default class StubHubController extends React.Component {
 
 
     render() {
-        console.log(this.state.userInput.api_key_response)
         return (<div className="container-fluid" style={{ 'padding-top': 30 }}>
             <div classNmae="row" style={{ 'boarder': '1px' }}>
                 <div className="row">

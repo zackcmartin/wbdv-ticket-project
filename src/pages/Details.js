@@ -55,15 +55,12 @@ export default class Details extends React.Component {
 
     componentDidMount() {
         let { event_id } = this.props.match.params
-        console.log(this.state)
-
-        console.log(event_id)
+        userService.getUser(this.state.userInput.username)
+            .then(response => response.json()).then(user => this.setState({ userInput: user })).catch(err => this.setState({ error: true }))
         this.initialize()
     }
 
     render() {
-        console.log(this.state.reviews)
-        console.log(this.state.username)
         return (
 
             <div>
@@ -135,10 +132,10 @@ export default class Details extends React.Component {
                                     <div className="card-body">
                                         <p className={"card-text"}>
                                             {review.review}
-                                            {(review.user.username === this.state.username) &&
+                                            {(review.user.username === this.state.userInput.username) &&
                                             <FontAwesomeIcon className="float-right" onClick={() => this.deleteReview(review.id)} icon={faWindowClose} />}
                                         </p>
-                                        <p className={"card-text "}>
+                                        <p className={"card-text"}>
                                             <Link to={{ pathname: `/profile/${review.user.username}`,
                                                 state: { user: this.state.userInput }
                                             }}>
@@ -172,21 +169,20 @@ export default class Details extends React.Component {
     }
 
     async addReview(){
-        let response = await reviewService.addReviewToEvent("george@gmail.com", this.state.event.id,
+        let response = await reviewService.addReviewToEvent(this.state.userInput.username, this.state.event.id,
             {review: this.state.new_review})
         let reviews_response = await reviewService.getReviewsForEvent(this.state.event.id)
         this.setState({reviews: reviews_response})
     }
 
     async addTrackedEvent() {
-        let response = await userService.addTrackedEvent("george@gmail.com", this.state.event.id)
+        let response = await userService.addTrackedEvent(this.state.userInput.username, this.state.event.id)
     }
 
 
     async deleteReview(review_id) {
-        console.log(review_id)
-        let new_reviews = await userService.deleteReview("george@gmail.com",review_id)
-        console.log(new_reviews)
-        this.setState({reviews: new_reviews})
+        let user_reviews = await userService.deleteReview(this.state.userInput.username,review_id)
+        let event_reviews = await reviewService.getReviewsForEvent(this.state.event.id)
+        this.setState({reviews: event_reviews})
     }
 }
