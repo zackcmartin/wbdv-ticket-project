@@ -13,13 +13,13 @@ export default class UserService {
 
 
     getUser = (username) =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${username}`)
+        fetch(`https://wbdv-ticket-server-kkhomiakov.herokuapp.com/api/users/${username}`)
 
     getAllUsers = () =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/`)
+        fetch(`https://wbdv-ticket-server-kkhomiakov.herokuapp.com/api/users/`)
 
     updateUser = (user, username) =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${username}`, {
+        fetch(`https://wbdv-ticket-server-kkhomiakov.herokuapp.com/api/users/${username}`, {
             method: 'PUT',
             body: JSON.stringify(user),
             headers: {
@@ -32,7 +32,7 @@ export default class UserService {
 
 
     deleteUser = (username) =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${username}`, {
+        fetch(`https://wbdv-ticket-server-kkhomiakov.herokuapp.com/api/users/${username}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
@@ -44,7 +44,7 @@ export default class UserService {
 
 
     createUser = (user) =>
-        fetch("https://wbdv-ticket-server.herokuapp.com/api/users/", {
+        fetch("https://wbdv-ticket-server-kkhomiakov.herokuapp.com/api/users/", {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {
@@ -57,7 +57,7 @@ export default class UserService {
 
     
     addTrackedEvent = (username, eventId) =>
-    fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${username}/events/${eventId}`, {
+    fetch(`https://wbdv-ticket-server-kkhomiakov.herokuapp.com/api/users/${username}/events/${eventId}`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
