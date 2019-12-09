@@ -3,6 +3,7 @@ import events from "../data/events";
 import StubHubService from "../stubhub-service/StubHubService";
 import ReviewService from "../services/ReviewService";
 import EventService from "../services/EventService";
+import UserService from "../services/UserService";
 import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
 
@@ -11,7 +12,7 @@ import { Link, Redirect } from 'react-router-dom'
 let stubHubService = StubHubService.getInstance();
 let reviewService = ReviewService.getInstance();
 let eventService =  EventService.getInstance();
-
+let userService = UserService.getInstance();
 
 
 
@@ -44,6 +45,7 @@ export default class Details extends React.Component {
         }
 
         this.addReview = this.addReview.bind(this)
+        this.addTrackedEvent = this.addTrackedEvent.bind(this)
     }
 
     componentDidMount() {
@@ -136,7 +138,7 @@ export default class Details extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col offset-md-4">
-                            <button className="btn btn-dark my-4" >Add event to your tracked events</button>
+                            <button className="btn btn-dark my-4" onClick={this.addTrackedEvent}>Add event to your tracked events</button>
                         </div>
                     </div>
                 </div>
@@ -163,6 +165,10 @@ export default class Details extends React.Component {
         let reviews_response = await reviewService.getReviewsForEvent(this.state.event.id)
         console.log(reviews_response)
         this.setState({reviews: reviews_response})
+    }
+
+    async addTrackedEvent() {
+        let response = await userService.addTrackedEvent("george@gmail.com", this.state.event.id)
 
     }
 }
