@@ -129,7 +129,9 @@ export default class Details extends React.Component {
                                             {review.review}
                                         </p>
                                         <p className={"card-text "}>
-                                            {`Commented by ${review.user.username}`}
+                                            <Link to={`/profile/${review.user.username}`}>
+                                                {`Commented by ${review.user.username}`}
+                                            </Link>
                                         </p>
                                     </div>
                                 </div>
