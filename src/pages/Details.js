@@ -56,7 +56,6 @@ export default class Details extends React.Component {
     }
 
     render() {
-        console.log("here" + this.state.userInput.firstName)
         return (
 
             <div>
