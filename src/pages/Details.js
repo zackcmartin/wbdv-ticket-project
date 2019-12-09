@@ -114,7 +114,7 @@ export default class Details extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-4 offset-md-2">
+                        <div className="col-md-4 offset-md-2 col-sm-10">
                             <h3>Comments</h3>
                             <form>
                                 <div className="form-group">
@@ -123,7 +123,7 @@ export default class Details extends React.Component {
     onChange={(e) => {
         this.setState({new_review: e.target.value})
     }}
-    className="form-control" id="commentinput" rows="3" placeholder={"Write how you feel about the concert"}/>
+    className="form-control" id="commentinput" rows="3" placehosearchlder={"Write how you feel about the concert"}/>
                                 </div>
                             </form>
                             <button className={"btn btn-dark my-2"} onClick={this.addReview}>Submit comment</button>
@@ -136,7 +136,9 @@ export default class Details extends React.Component {
                                             <FontAwesomeIcon className="float-right" onClick={() => this.deleteReview(review.id)} icon={faWindowClose} />}
                                         </p>
                                         <p className={"card-text "}>
-                                            <Link to={`/profile/${review.user.username}`}>
+                                            <Link to={{ pathname: `/profile/${review.user.username}`,
+                                                state: { user: this.state.userInput }
+                                            }}>
                                                 {`Commented by ${review.user.username}`}
                                             </Link>
                                         </p>

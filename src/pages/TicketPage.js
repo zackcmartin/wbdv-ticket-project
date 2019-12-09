@@ -165,16 +165,19 @@ export default class TicketPage extends React.Component {
                     <div className="row">
                         {!this.selected_event && this.state.event_many.map(event => {
                             let button = (
-                                <button type="button" className="btn btn-dark" onClick={() => {
-                                    this.setState({ selected_event: event })
+                                <Link to={{
+                                    pathname: `/details/${event.id}`,
+                                    state: { userInput: this.state.userInput }
                                 }}>
+                                <button type="button" className="btn btn-dark">
                                     Load Data
-                            </button>
+                                </button>
+                                </Link>
                             );
                             return (
                                 <EventCard
                                     key={event.id}
-                                    className={"col-3 m-2"}
+                                    className={"col-3 m-2 col-sm-10"}
                                     title={event.name}
                                     text={`${event.venue.name} at ${event.eventDateLocal}`}
                                     button={button}
@@ -182,35 +185,6 @@ export default class TicketPage extends React.Component {
                             );
                         })}
 
-                    </div>
-                    <div className={"row"}>
-                        <div className={"col"}>
-                            <form>
-                                <div className="form-group">
-                                    <label htmlFor="commentinput">Write a comment!</label>
-                                    <textarea className="form-control" id="commentinput" rows="3" placeholder={"Write how you feel about the concert"}></textarea>
-                                </div>
-                            </form>
-                            {this.state.selected_event && <div>
-                                <EventCard
-                                    key={this.state.selected_event.id}
-                                    className={"col-3 m-2"}
-                                    title={this.state.selected_event.name}
-                                    text={`${this.state.selected_event.venue.name} at ${this.state.selected_event.eventDateLocal}`}
-                                /></div>}
-                            {this.state.reviews.map(review =>
-                                <div className="card bg-light border-dark">
-                                    <div className="card-body">
-                                        <p className={"card-text"}>
-                                            {review.text}
-                                        </p>
-                                        <p className={"card-text "}>
-                                            {`Commented by ${review.username}`}
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
                     </div>
                 </div>
             </div>

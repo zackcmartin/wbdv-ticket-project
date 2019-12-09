@@ -134,7 +134,7 @@ export default class Search extends React.Component {
                             let button = (
                                 <Link to={{
                                     pathname: `/details/${event.id}`,
-                                    state: { user: this.state.userInput }
+                                    state: { userInput: this.state.userInput }
                                 }}>
                                     <button type="button" className="btn btn-dark">Go to event</button>
                                 </Link>
