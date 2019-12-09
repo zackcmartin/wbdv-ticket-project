@@ -58,10 +58,10 @@ export default class Profile extends React.Component {
 
 
     componentDidMount() {
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}`)
+       userService.getUser(this.state.userInput.username)
             .then(response => response.json()).then(user => this.setState({ userInput: user })).catch(err => this.setState({ error: true }))
 
-        this.getEvents()
+        eventService.getEvents(this.state.userInput.username).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))
     }
 
 
@@ -82,42 +82,6 @@ export default class Profile extends React.Component {
     }
 
 
-    getEvents = () => {
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}/events`)
-            .then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))
-    }
-
-
-
-    deleteEvent = (eventId) =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}/events/${eventId}`, {
-            method: 'DELETE',
-            body: JSON.stringify(eventId),
-            headers: {
-                'content-type': 'application/json',
-                'Accept': 'application/json',
-                'Access-Control-Allow-Credentials': true,
-                'Access-Control-Allow-Origin': true
-            },
-        })
-            .then(() => this.getEvents())
-
-
-
-
-    updateUser = (user) =>
-        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${this.state.userInput.username}`, {
-            method: 'PUT',
-            body: JSON.stringify(user),
-            headers: {
-                'content-type': 'application/json',
-                'Accept': 'application/json',
-                'Access-Control-Allow-Credentials': true,
-                'Access-Control-Allow-Origin': true
-            },
-        })
-            .then(this.setState({ toSignIn: true }))
-
 
 
     checkUpdateUser() {
@@ -128,7 +92,7 @@ export default class Profile extends React.Component {
         }
 
         else {
-            this.updateUser(this.state.userInput)
+            userService.updateUser(this.state.userInput, this.state.userInput.username)
         }
 
     }
@@ -183,7 +147,7 @@ export default class Profile extends React.Component {
                                         <li key={event.id} className="nav">
                                             <button className="btn btn-primary">{event.description}
                                             </button>
-                                            <button className="btn btn-primary" onClick={() => this.deleteEvent(event.id)} style={{ marginLeft: 10 }}>
+                                            <button className="btn btn-primary" onClick={() => eventService.deleteEvent(event.id).then(eventService.getEvents())} style={{ marginLeft: 10 }}>
                                                 <FontAwesomeIcon icon="trash-alt" />
                                             </button>
                                         </li>
@@ -231,7 +195,8 @@ export default class Profile extends React.Component {
                                 placeholder={this.state.userInput.firstName} className="form-control"
                                 onChange={(e) => this.setState({
                                     userInput: {
-                                        firstName: e.currentTarget.value
+                                        ...this.state.userInput,
+                                        firstName: e.currentTarget.value,
                                     }
                                 })} />
 
@@ -241,6 +206,7 @@ export default class Profile extends React.Component {
                                 placeholder={this.state.userInput.lastName} className="form-control"
                                 onChange={(e) => this.setState({
                                     userInput: {
+                                        ...this.state.userInput,
                                         lastName: e.currentTarget.value
                                     }
                                 })} />
@@ -249,7 +215,7 @@ export default class Profile extends React.Component {
                             <input
                                 value={this.state.userInput.username}
                                 placeholder="Stubhub email address" className="form-control"
-                                onChange={(e) => this.state.userInput.username = e.currentTarget.value} disabled />
+                                disabled />
 
                             <h5>Password:</h5>
                             <input
@@ -258,6 +224,7 @@ export default class Profile extends React.Component {
                                 placeholder="********" className="form-control"
                                 onChange={(e) => this.setState({
                                     userInput: {
+                                        ...this.state.userInput,
                                         password: e.currentTarget.value
                                     }
                                 })} />

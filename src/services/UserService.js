@@ -15,11 +15,13 @@ export default class UserService {
     getUser = (username) =>
         fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${username}`)
 
+    getAllUsers = () =>
+        fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/`)
 
-    updateUser = (username) =>
+    updateUser = (user, username) =>
         fetch(`https://wbdv-ticket-server.herokuapp.com/api/users/${username}`, {
             method: 'PUT',
-            body: JSON.stringify(username),
+            body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json',
                 'Accept': 'application/json',
