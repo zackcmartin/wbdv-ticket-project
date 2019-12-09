@@ -68,6 +68,7 @@ export default class Profile extends React.Component {
         }
         this.getAllListings = this.getAllListings.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
+        this.checkUpdateUser = this.checkUpdateUser.bind(this);
     }
 
 
@@ -82,17 +83,17 @@ export default class Profile extends React.Component {
 
 
     async getAllListings() {
-            try {
-                let response = await stubHubService.getAPItoken(this.state.userInput.username, this.state.userInput.password);
-                stubHubService.setAccessToken(response.access_token)
-                let response2 = await stubHubService.getAllListings();
-                this.setState({
-                    listingArray: response2.listings.listing
-                })
-            }
-            catch{
-                this.setState({ listingError: true })
-            }
+        try {
+            let response = await stubHubService.getAPItoken(this.state.userInput.username, this.state.userInput.password);
+            stubHubService.setAccessToken(response.access_token)
+            let response2 = await stubHubService.getAllListings();
+            this.setState({
+                listingArray: response2.listings.listing
+            })
+        }
+        catch{
+            this.setState({ listingError: true })
+        }
     }
 
 
@@ -196,7 +197,7 @@ export default class Profile extends React.Component {
                                             <button className="btn btn-dark">{event.description}
                                             </button>
                                             <div style={this.state.viewerInput.type === 'admin' ? { 'padding-top': 0 } : { display: 'none' }} >
-                                                <button className="btn btn-dark" style={{ marginLeft: 10 }} onClick={() => eventService.deleteEvent(event.id).then(eventService.getEvents(this.state.userInput.username)).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))}>
+                                                <button className="btn btn-dark" style={{ marginLeft: 10 }} onClick={() => eventService.deleteEvent(this.state.userInput.username, event.id).then(eventService.getEvents(this.state.userInput.username)).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))}>
                                                     <FontAwesomeIcon icon="trash-alt" />
                                                 </button>
                                             </div>
@@ -219,23 +220,23 @@ export default class Profile extends React.Component {
                         <div className="col-md-10 col-md-offset-1">
                             <h1>{this.state.userInput.firstName} {this.state.userInput.lastName}'s Listings</h1>
                             <div style={this.state.noUser === true ? { display: 'none' } : { 'padding-top': 0 }}>
-                            <button onClick={this.getAllListings} className="btn btn-dark">Show Listings</button>
-                            <ul className="list-group">
-                                {this.state.listingArray && this.state.listingArray.map((listing) => (
-                                    <li className="list-group">
-                                        <h3>Event : <div style={{ color: 'blue' }}>{listing.eventDescription}</div></h3>
-                                    </li>
-                                ))
-                                }
-                            </ul>
+                                <button onClick={this.getAllListings} className="btn btn-dark">Show Listings</button>
+                                <ul className="list-group">
+                                    {this.state.listingArray && this.state.listingArray.map((listing) => (
+                                        <li className="list-group">
+                                            <h3>Event : <div style={{ color: 'blue' }}>{listing.eventDescription}</div></h3>
+                                        </li>
+                                    ))
+                                    }
+                                </ul>
                             </div>
                             <div style={this.state.noUser === false ? { display: 'none' } : { 'padding-top': 0 }}>
-                                <h4 style={{color: 'red'}}>You must have an account to view a user's listings</h4>
+                                <h4 style={{ color: 'red' }}>You must have an account to view a user's listings</h4>
                             </div>
                         </div>
                     </div>
 
-                    <div style={this.state.userInput.type === 'admin' ? { 'padding-top': 0 } : { display: 'none' } } className="row">
+                    <div style={this.state.viewerInput.type === 'admin' ? { 'padding-top': 0 } : { display: 'none' }} className="row">
                         <div className="col-md-10 col-md-offset-1">
                             <h1>Edit Profile</h1>
                             <h5>First Name:</h5>

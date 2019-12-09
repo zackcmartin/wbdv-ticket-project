@@ -1,14 +1,17 @@
 import React from 'react'
 
 import StubHubService from "../stubhub-service/StubHubService";
+import UserService from "../services/UserService"
 import EventCard from "../components/EventCard";
 import { Link } from "react-router-dom";
 import queryString from 'query-string';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import logo from './logo.png';
+import moment from 'moment';
 
 let stubHubService = StubHubService.getInstance();
+let userService = UserService.getInstance();
 
 export default class Search extends React.Component {
 
@@ -44,6 +47,10 @@ export default class Search extends React.Component {
     }
 
     componentDidMount() {
+    
+        userService.getUser(this.state.userInput.username)
+            .then(response => response.json()).then(user => this.setState({ userInput: user })).catch(err => this.setState({ error: true }))
+
         let cur_values = queryString.parse(this.props.location.search);
         stubHubService.setAccessToken()
         if(cur_values.event_name){
@@ -117,7 +124,7 @@ export default class Search extends React.Component {
                             <input className={"my-3 form-control"} value={this.state.event_name}
                                 placeholder="Insert event you are searching for"
                                 onChange={(e) => this.setState({ event_name: e.currentTarget.value })} />
-                            <Link to={`/search?event_name=${this.state.event_name}`}>
+                            <Link to={{pathname: `/search`, search: `?event_name=${this.state.event_name}`, state: {user: this.state.userInput, event_name: this.state.event_name}}}>
                                 <button className="btn btn-dark btn-block" >Search for Events</button>
                             </Link>
                         </div>
@@ -136,7 +143,7 @@ export default class Search extends React.Component {
                                 key={event.id}
                                 className={"col-3 m-2"}
                                 title={event.name}
-                                text={`${event.venue.name} at ${event.eventDateLocal}`}
+                                text={`${event.venue.name} at ${moment(event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}
                                 button={button}
                             />
                         })
