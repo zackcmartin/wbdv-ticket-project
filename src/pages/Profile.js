@@ -147,7 +147,7 @@ export default class Profile extends React.Component {
                                         <li key={event.id} className="nav">
                                             <button className="btn btn-dark">{event.description}
                                             </button>
-                                            <button className="btn btn-dark" onClick={() => eventService.deleteEvent(event.id).then(eventService.getEvents())} style={{ marginLeft: 10 }}>
+                                            <button className="btn btn-dark" onClick={() => eventService.deleteEvent(this.state.userInput.username, event.id).then(eventService.getEvents(this.state.userInput.username)).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))} style={{ marginLeft: 10 }}>
                                                 <FontAwesomeIcon icon="trash-alt" />
                                             </button>
                                         </li>

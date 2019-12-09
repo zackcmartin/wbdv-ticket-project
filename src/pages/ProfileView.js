@@ -196,7 +196,7 @@ export default class Profile extends React.Component {
                                             <button className="btn btn-dark">{event.description}
                                             </button>
                                             <div style={this.state.viewerInput.type === 'admin' ? { 'padding-top': 0 } : { display: 'none' }} >
-                                                <button className="btn btn-dark" style={{ marginLeft: 10 }} onClick={() => eventService.deleteEvent(event.id).then(eventService.getEvents(this.state.userInput.username)).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))}>
+                                                <button className="btn btn-dark" style={{ marginLeft: 10 }} onClick={() => eventService.deleteEvent(this.state.userInput.username, event.id).then(eventService.getEvents(this.state.userInput.username)).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))}>
                                                     <FontAwesomeIcon icon="trash-alt" />
                                                 </button>
                                             </div>
