@@ -22,6 +22,7 @@ export default class Search extends React.Component {
         let noUser = false;
         let userInput = {
             username: '',
+
             password: '',
             firstName: '',
             lastName: '',

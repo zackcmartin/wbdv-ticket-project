@@ -6,6 +6,7 @@ import StubHubService from "../stubhub-service/StubHubService";
 import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
 import { Link, Redirect } from 'react-router-dom'
+import moment from 'moment';
 
 let stubHubService = StubHubService.getInstance();
 
@@ -179,7 +180,7 @@ export default class TicketPage extends React.Component {
                                     key={event.id}
                                     className={"col-3 m-2 col-sm-10"}
                                     title={event.name}
-                                    text={`${event.venue.name} at ${event.eventDateLocal}`}
+                                    text={`${event.venue.name} at ${moment(event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}
                                     button={button}
                                 />
                             );

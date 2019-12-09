@@ -6,6 +6,7 @@ import EventService from "../services/EventService";
 import UserService from "../services/UserService";
 import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
+import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
@@ -15,6 +16,7 @@ let stubHubService = StubHubService.getInstance();
 let reviewService = ReviewService.getInstance();
 let eventService =  EventService.getInstance();
 let userService = UserService.getInstance();
+
 
 
 
@@ -52,7 +54,8 @@ export default class Details extends React.Component {
     }
 
     componentDidMount() {
-        let { event_id} = this.props.match.params
+        let { event_id } = this.props.match.params
+        console.log(this.state)
 
         console.log(event_id)
         this.initialize()
@@ -107,7 +110,7 @@ export default class Details extends React.Component {
                             <div className="card">
                                 <div className="card-body bg-light mb-3">
                                     <p className="card-text">{this.state.event.description}</p>
-                                    <p className="card-text">{`Save the date: ${this.state.event.eventDateLocal}`}</p>
+                                    <p className="card-text">{`Save the date: ${moment(this.state.event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}</p>
                                     <p className="card-text">{`Get excited to see ${this.state.event.performers.name} to play at ${this.state.event.venue.name}`} </p>
                                 </div>
                             </div>
@@ -120,10 +123,10 @@ export default class Details extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="commentinput">Write a comment!</label>
                                     <textarea value={this.state.new_review}
-    onChange={(e) => {
-        this.setState({new_review: e.target.value})
-    }}
-    className="form-control" id="commentinput" rows="3" placehosearchlder={"Write how you feel about the concert"}/>
+                                onChange={(e) => {
+                                    this.setState({new_review: e.target.value})
+                                }}
+                                className="form-control" id="commentinput" rows="3" placehosearchlder={"Write how you feel about the concert"}/>
                                 </div>
                             </form>
                             <button className={"btn btn-dark my-2"} onClick={this.addReview}>Submit comment</button>
@@ -153,13 +156,13 @@ export default class Details extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div> )
-        }
+            </div>)
+    }
 
-    async initialize(){
-        let { event_id} = this.props.match.params
+    async initialize() {
+        let { event_id } = this.props.match.params
         stubHubService.setAccessToken()
-        let eventResponse  = await stubHubService.getEvents({id: event_id})
+        let eventResponse = await stubHubService.getEvents({ id: event_id })
         let event = eventResponse.events[0]
 
         event.performers = event.performers.join(',')
@@ -178,6 +181,7 @@ export default class Details extends React.Component {
     async addTrackedEvent() {
         let response = await userService.addTrackedEvent("george@gmail.com", this.state.event.id)
     }
+
 
     async deleteReview(review_id) {
         console.log(review_id)
