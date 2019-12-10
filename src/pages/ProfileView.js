@@ -14,6 +14,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
+import moment from 'moment';
+import EventCard from "../components/EventCard";
+
 library.add(faTrashAlt);
 
 
@@ -116,8 +119,8 @@ export default class Profile extends React.Component {
         eventService.deleteEvent(this.state.userInput.username, eventId).then(() => this.getEvents())
     }
 
-    getEvents(){
-        eventService.getEvents(this.state.userInput.username).then(response => response.json()).then(events => this.setState({events: events})).catch(err => this.setState({ error: true }))
+    getEvents() {
+        eventService.getEvents(this.state.userInput.username).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))
     }
 
 
@@ -198,25 +201,43 @@ export default class Profile extends React.Component {
                         </div>
                     </div>
 
+
                     <div className="row">
                         <div className="col-md-10 col-md-offset-1">
                             <h1>{this.state.userInput.firstName} {this.state.userInput.lastName}'s Events</h1>
-                            <ul className="list-group">
-                                {
-                                    this.state.events && this.state.events.map(event =>
-                                        <li key={event.id} className="nav">
-                                            <button className="btn btn-dark">{event.description}
-                                            </button>
-                                            <div style={this.state.viewerInput.type === 'admin' ? { 'padding-top': 0 } : { display: 'none' }} >
-                                                <button className="btn btn-dark" style={{ marginLeft: 10 }} onClick={() => this.deleteEvent(event.id)}>
-                                                    <FontAwesomeIcon icon="trash-alt" />
-                                                </button>
-                                            </div>
-                                        </li>
-                                    )
-                                }
-                            </ul>
                         </div>
+                    </div>
+
+                    <div className="row">
+                        {this.state.events && this.state.events.map(event => {
+                            let button = (
+                                <div>
+                                    <Link to={{
+                                        pathname: `/details/${event.id}`,
+                                        state: { user: this.state.userInput }
+                                    }}>
+                                        <button type="button" className="btn btn-dark">
+                                            Go to event
+                                </button>
+                                    </Link>
+
+                                    <button className="btn btn-dark" onClick={() => this.deleteEvent(event.id)} style={{ marginLeft: 10 }}>
+                                        <FontAwesomeIcon icon="trash-alt" />
+                                    </button>
+
+                                </div>
+
+                            );
+                            return (
+                                <EventCard
+                                    key={event.id}
+                                    className={"col-md-3 m-2 col-12"}
+                                    title={event.name}
+                                    text={`${event.venue.name} at ${moment(event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}
+                                    button={button}
+                                />
+                            );
+                        })}
                     </div>
 
 
