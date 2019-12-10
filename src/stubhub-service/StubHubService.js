@@ -1,3 +1,5 @@
+import buildUrl from 'build-url';
+
 export default class StubHubService {
 
     // khomchenko.g@husky.neu.edu
@@ -18,9 +20,10 @@ export default class StubHubService {
         return this.myInstance
     }
 
-    setAccessToken (access_token){
+    setAccessToken (access_token = 'VRGm8vAS1SuXJDKe7P3oqMXVnL2S'){
         this.access_token = access_token
     }
+
 
     async getAPItoken(email, pass) {
         let proxyUrl = 'https://cors-anywhere.herokuapp.com/'
@@ -29,7 +32,6 @@ export default class StubHubService {
             username: email,
             password: pass
         }
-        console.log(JSON.stringify(requestBody))
         const response =  await fetch(proxyUrl + url, {
             method: 'post',
             body: JSON.stringify(requestBody),
@@ -119,6 +121,25 @@ export default class StubHubService {
         let proxyUrl = 'https://cors-anywhere.herokuapp.com/'
         let url = 'https://api.stubhub.com/sellers/sales/v3';
         const response =  await fetch(proxyUrl + url, {
+            method: 'get',
+            headers: {
+                'Authorization': 'Bearer ' + this.access_token,
+                'Accept': 'application/json'
+
+            }
+        })
+        const json = response.json()
+        return json
+    }
+
+    async getEvents(queryParams){
+        queryParams['city'] = 'boston'
+        let proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+        let url = 'https://api.stubhub.com/sellers/search/events/v3';
+        let finalUrl = buildUrl(proxyUrl+url, {
+            queryParams: queryParams
+        })
+        const response =  await fetch(finalUrl, {
             method: 'get',
             headers: {
                 'Authorization': 'Bearer ' + this.access_token,
