@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
+import moment from 'moment';
+import EventCard from "../components/EventCard";
 
 import { Link, Redirect } from 'react-router-dom'
 
@@ -60,7 +62,7 @@ export default class Profile extends React.Component {
 
 
     componentDidMount() {
-       userService.getUser(this.state.userInput.username)
+        userService.getUser(this.state.userInput.username)
             .then(response => response.json()).then(user => this.setState({ userInput: user })).catch(err => this.setState({ error: true }))
 
         eventService.getEvents(this.state.userInput.username).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))
@@ -103,8 +105,8 @@ export default class Profile extends React.Component {
         eventService.deleteEvent(this.state.userInput.username, eventId).then(() => this.getEvents())
     }
 
-    getEvents(){
-        eventService.getEvents(this.state.userInput.username).then(response => response.json()).then(events => this.setState({events: events})).catch(err => this.setState({ error: true }))
+    getEvents() {
+        eventService.getEvents(this.state.userInput.username).then(response => response.json()).then(events => this.setState({ events: events })).catch(err => this.setState({ error: true }))
     }
 
 
@@ -138,7 +140,7 @@ export default class Profile extends React.Component {
                 </Navbar>
 
 
-                <div className="container-fluid" style={this.state.loadingError === true ? { display: 'none' } : { 'padding-top': 0 }}>
+                <div className="container" style={this.state.loadingError === true ? { display: 'none' } : { 'padding-top': 0 }}>
                     {/* If not an admin */}
                     <div style={this.state.userInput.type === "admin" ? { 'padding-top': 0 } : { display: 'none' }} >
                         <div className="row">
@@ -151,20 +153,39 @@ export default class Profile extends React.Component {
                     <div className="row">
                         <div className="col-md-10 col-md-offset-1">
                             <h1>Your Events</h1>
-                            <ul className="list-group">
-                                {
-                                    this.state.events && this.state.events.map(event =>
-                                        <li key={event.id} className="nav">
-                                            <button className="btn btn-dark">{event.description}
-                                            </button>
-                                            <button className="btn btn-dark" onClick={() => this.deleteEvent(event.id)} style={{ marginLeft: 10 }}>
-                                                <FontAwesomeIcon icon="trash-alt" />
-                                            </button>
-                                        </li>
-                                    )
-                                }
-                            </ul>
                         </div>
+                    </div>
+
+                    <div className="row">
+                        {this.state.events && this.state.events.map(event => {
+                            let button = (
+                                <div>
+                                    <Link to={{
+                                        pathname: `/details/${event.id}`,
+                                        state: { user: this.state.userInput }
+                                    }}>
+                                        <button type="button" className="btn btn-dark">
+                                            Go to event
+                                </button>
+                                    </Link>
+
+                                    <button className="btn btn-dark" onClick={() => this.deleteEvent(event.id)} style={{ marginLeft: 10 }}>
+                                        <FontAwesomeIcon icon="trash-alt" />
+                                    </button>
+
+                                </div>
+
+                            );
+                            return (
+                                <EventCard
+                                    key={event.id}
+                                    className={"col-md-3 m-2 col-12"}
+                                    title={event.name}
+                                    text={`${event.venue.name} at ${moment(event.eventDateLocal).format('MMMM Do YYYY, h:mm:ss a')}`}
+                                    button={button}
+                                />
+                            );
+                        })}
                     </div>
 
 
@@ -242,7 +263,7 @@ export default class Profile extends React.Component {
                             <button onClick={this.checkUpdateUser} className="btn btn-dark btn-block">Save Changes</button>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <div className="row">
                         <div className="col-md-10 col-md-offset-1">
                             <Link to="/login">
