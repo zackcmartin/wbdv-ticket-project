@@ -11,6 +11,7 @@ import StubHubController from '../components/StubHubController'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Search from "./Search";
 import Details from "./Details"
+import Privacy  from "./Privacy";
 
 class RoutingPage extends React.Component {
     render() {
@@ -50,6 +51,9 @@ class RoutingPage extends React.Component {
                     <Route
                         path="/login"
                         component={Login} />
+
+                        <Route path="/privacy"
+                               component={Privacy} />
                 </div>
             </Router>
         )
