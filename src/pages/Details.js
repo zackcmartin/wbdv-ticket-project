@@ -158,8 +158,8 @@ export default class Details extends React.Component {
                                         <p className={"card-text"}>
                                             {review.review}
                                             {(review.user.username === this.state.userInput.username) && (<div>
-                                                <FontAwesomeIcon className="float-right" onClick={() => this.deleteReview(review.id)} icon={faWindowClose} />
-                                                <FontAwesomeIcon className="float-right" onClick={() => this.editReview(review.id)} icon={faPencilAlt} />
+                                                <FontAwesomeIcon className="float-right mx-1" onClick={() => this.deleteReview(review.id)} icon={faWindowClose} />
+                                                <FontAwesomeIcon className="float-right mx-1" onClick={() => this.editReview(review.id)} icon={faPencilAlt} />
                                             </div>)
                                             }
                                         </p>
