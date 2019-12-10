@@ -8,7 +8,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import logo from './logo.png';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { faWindowClose, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
 import { Link, Redirect } from 'react-router-dom'
 
@@ -57,6 +57,7 @@ export default class Details extends React.Component {
         this.addReview = this.addReview.bind(this)
         this.addTrackedEvent = this.addTrackedEvent.bind(this)
         this.deleteReview = this.deleteReview.bind(this)
+        this.editReview = this.editReview.bind(this)
     }
 
     componentDidMount() {
@@ -156,8 +157,11 @@ export default class Details extends React.Component {
                                     <div className="card-body">
                                         <p className={"card-text"}>
                                             {review.review}
-                                            {(review.user.username === this.state.userInput.username) &&
-                                            <FontAwesomeIcon className="float-right" onClick={() => this.deleteReview(review.id)} icon={faWindowClose} />}
+                                            {(review.user.username === this.state.userInput.username) && (<div>
+                                                <FontAwesomeIcon className="float-right" onClick={() => this.deleteReview(review.id)} icon={faWindowClose} />
+                                                <FontAwesomeIcon className="float-right" onClick={() => this.editReview(review.id)} icon={faPencilAlt} />
+                                            </div>)
+                                            }
                                         </p>
                                         <p className={"card-text"}>
                                             <Link to={{ pathname: `/profile/${review.user.username}`,
@@ -217,11 +221,17 @@ export default class Details extends React.Component {
             this.setState({ commentNoUser: true })
         }
         else {
-            let response = await reviewService.addReviewToEvent("george@gmail.com", this.state.event.id,
+            let response = await reviewService.addReviewToEvent(this.state.userInput.username, this.state.event.id,
                 { review: this.state.new_review })
             let reviews_response = await reviewService.getReviewsForEvent(this.state.event.id)
-            this.setState({ reviews: reviews_response })
+            this.setState({ reviews: reviews_response , new_review: '' })
         }
+    }
+
+    async editReview(review_id) {
+        let user_reviews = await userService.updateReview(this.state.userInput.username, review_id, { review: this.state.new_review })
+        let event_reviews = await reviewService.getReviewsForEvent(this.state.event.id)
+        this.setState({reviews: event_reviews, new_review: ''})
     }
 
     async addTrackedEvent() {
@@ -229,7 +239,8 @@ export default class Details extends React.Component {
             this.setState({ tackNoUser: true })
         }
         else {
-            let response = await userService.addTrackedEvent("george@gmail.com", this.state.event.id).then(this.setState({ eventAdded: true }))
+            let response = await userService.addTrackedEvent(this.state.userInput.username, this.state.event.id)
+                .then(() => this.setState({ eventAdded: true }))
         }
     }
 
