@@ -172,7 +172,7 @@ export default class Profile extends React.Component {
                 </Navbar>
 
 
-                <div className="container-fluid" style={{ 'padding-top': 10 }}>
+                <div className="container" style={{ 'padding-top': 10 }}>
 
                     <div style={this.state.error === true ? { 'padding-top': 0 } : { display: 'none' }} >
                         <div className="row">
@@ -187,7 +187,7 @@ export default class Profile extends React.Component {
                             <div className="col-md-10 col-md-offset-1">
                                 <h1 style={{ color: 'green', fontSize: 18 }}>As an admin, you have the ability to edit this user's first/last name and events. You may also delete them if you deem it necessary.</h1>
                             </div>
-                            <div>
+                            <div className="col-md-10 col-md-offset-1">
                                 <button className="btn btn-danger" onClick={() => this.deleteUser()}>Delete User</button>
                             </div>
                         </div>
@@ -221,7 +221,7 @@ export default class Profile extends React.Component {
                                 </button>
                                     </Link>
 
-                                    <button className="btn btn-dark" onClick={() => this.deleteEvent(event.id)} style={{ marginLeft: 10 }}>
+                                    <button className="btn btn-dark" onClick={() => this.deleteEvent(event.id)} style={this.state.viewerInput.type === 'admin' ?  {  marginLeft: 10} : { display: 'none' } }>
                                         <FontAwesomeIcon icon="trash-alt" />
                                     </button>
 

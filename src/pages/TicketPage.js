@@ -227,6 +227,13 @@ export default class TicketPage extends React.Component {
                             );
                         })}
                     </div>
+                    <div className="row">
+                        <div className="col">
+                            <Link to="/privacy">
+                                <p> Go to Privacy page</p>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
