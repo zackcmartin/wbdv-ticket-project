@@ -1,3 +1,6 @@
+In the unlikely event heroku is not working, to run our project, download both the ticket front end (this git) and our server. Run both locally. For the front end, npm start. Be sure to have the SQL database runnning and JPA.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
