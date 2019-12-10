@@ -118,7 +118,7 @@ export default class Details extends React.Component {
                     </div>
 
                     <div className="row">
-                        <div className="col-4 offset-md-2">
+                        <div className="col-md-4 offset-md-2">
                             <h2>{this.state.event.name}</h2>
                             <div className="card">
                                 <div className="card-body bg-light mb-3">
