@@ -20,7 +20,7 @@ export default class StubHubService {
         return this.myInstance
     }
 
-    setAccessToken (access_token = 'VRGm8vAS1SuXJDKe7P3oqMXVnL2S'){
+    setAccessToken (access_token = 'A3B7CxWtEWBDAWD4F0tGJ5tWJpnb'){
         this.access_token = access_token
     }
 
